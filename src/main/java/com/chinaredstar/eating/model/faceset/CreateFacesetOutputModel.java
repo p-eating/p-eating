@@ -18,7 +18,7 @@ public class CreateFacesetOutputModel extends CommonOutputModel {
     private String face_added;
     private String face_count;
 
-    private List<FailureDetail> failure_detail;
+    private List<FailureDetailModel> failure_detail;
 
 
     public String getFaceset_token() {
@@ -53,33 +53,13 @@ public class CreateFacesetOutputModel extends CommonOutputModel {
         this.face_count = face_count;
     }
 
-    public List<FailureDetail> getFailure_detail() {
+    public List<FailureDetailModel> getFailure_detail() {
         return failure_detail;
     }
 
-    public void setFailure_detail(List<FailureDetail> failure_detail) {
+    public void setFailure_detail(List<FailureDetailModel> failure_detail) {
         this.failure_detail = failure_detail;
     }
 
-    class FailureDetail {
-        private String reason;
-        private String face_token;
-
-        public String getReason() {
-            return reason;
-        }
-
-        public void setReason(String reason) {
-            this.reason = reason;
-        }
-
-        public String getFace_token() {
-            return face_token;
-        }
-
-        public void setFace_token(String face_token) {
-            this.face_token = face_token;
-        }
-    }
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class GetFacesetsOutputModel extends CommonOutputModel {
 
     private String next;
-    private List<Faceset> facesets;
+    private List<FacesetModel> facesets;
 
     public String getNext() {
         return next;
@@ -23,51 +23,13 @@ public class GetFacesetsOutputModel extends CommonOutputModel {
         this.next = next;
     }
 
-    public List<Faceset> getFacesets() {
+    public List<FacesetModel> getFacesets() {
         return facesets;
     }
 
-    public void setFacesets(List<Faceset> facesets) {
+    public void setFacesets(List<FacesetModel> facesets) {
         this.facesets = facesets;
     }
 
-    class Faceset {
-        private String faceset_token;
-        private String outer_id;
-        private String display_name;
-        private String tags;
-
-        public String getFaceset_token() {
-            return faceset_token;
-        }
-
-        public void setFaceset_token(String faceset_token) {
-            this.faceset_token = faceset_token;
-        }
-
-        public String getOuter_id() {
-            return outer_id;
-        }
-
-        public void setOuter_id(String outer_id) {
-            this.outer_id = outer_id;
-        }
-
-        public String getDisplay_name() {
-            return display_name;
-        }
-
-        public void setDisplay_name(String display_name) {
-            this.display_name = display_name;
-        }
-
-        public String getTags() {
-            return tags;
-        }
-
-        public void setTags(String tags) {
-            this.tags = tags;
-        }
-    }
 
 }
