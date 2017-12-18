@@ -16,4 +16,6 @@ public class FaceApiContants {
      * search face api
      */
     public static final String SEARCH_FACE_API = "https://api-cn.faceplusplus.com/facepp/v3/search";
+
+
 }
