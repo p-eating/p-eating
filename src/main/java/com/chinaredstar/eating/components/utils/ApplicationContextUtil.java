@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationContextUtil implements ApplicationContextAware {
 
+    private ApplicationContextUtil() {
+    }
+
     private static ApplicationContext applicationContext;
 
     @Override
