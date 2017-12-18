@@ -4,7 +4,7 @@ package com.chinaredstar.eating.model.common;
 import com.chinaredstar.eating.components.constants.FaceApiContants;
 
 /**
- * @description:
+ * @description: face++ api公共入参
  * @author: fangjian<jian.fang@chinaredstar.com>
  * @date: Create in 14:37 2017/12/18
  * @modified by:

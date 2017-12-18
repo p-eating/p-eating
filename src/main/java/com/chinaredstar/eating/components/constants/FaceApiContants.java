@@ -1,9 +1,23 @@
 package com.chinaredstar.eating.components.constants;
 
+import com.chinaredstar.eating.components.utils.ApplicationContextUtil;
+import com.chinaredstar.eating.model.config.FaceApiConfigModel;
+
 public class FaceApiContants {
 
-    public static final String API_KEY = "ejdVnSdcYpBoJvunl_i0U32TzNADE-sj";
-    public static final String API_SECRET = "wcibFWZGH6vZXTUADtaiRtR77Og2mNF-";
+    public static final String API_KEY;
+
+    public static final String API_SECRET;
+
+    public static final String FACESET_TOKEN;
+
+    static {
+        FaceApiConfigModel faceApiConfigModel = ApplicationContextUtil.getApplicationContext().getBean(FaceApiConfigModel.class);
+        API_KEY = faceApiConfigModel.getKey();
+        API_SECRET = faceApiConfigModel.getSecret();
+        FACESET_TOKEN = faceApiConfigModel.getFacesetToken();
+    }
+
 
     /**
      * faceSet create api

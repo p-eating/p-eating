@@ -2,7 +2,7 @@ package com.chinaredstar.eating.model.common;
 
 
 /**
- * @description:
+ * @description: face++ api公共出参
  * @author: fangjian<jian.fang@chinaredstar.com>
  * @date: Create in 14:37 2017/12/18
  * @modified by:

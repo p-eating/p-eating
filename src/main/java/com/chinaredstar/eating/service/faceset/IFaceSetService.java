@@ -6,7 +6,7 @@ import com.chinaredstar.eating.model.faceset.GetFacesetsInputModel;
 import com.chinaredstar.eating.model.faceset.GetFacesetsOutputModel;
 
 /**
- * @description:
+ * @description: faceset
  * @author: fangjian<jian.fang@chinaredstar.com>
  * @date: Create in 14:31 2017/12/18
  * @modified by:
