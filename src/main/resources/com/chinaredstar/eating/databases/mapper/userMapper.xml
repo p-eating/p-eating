@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chinaredstar.eating.mapper.DemoMapper">
+<mapper namespace="com.chinaredstar.eating.mapper.UserMapper">
 
     <select id="findUser" resultType="User">
         select employee_id as 'openId', name, market_code as 'marketCode', market_name as 'marketName'
         FROM t_sync_esb_employee where employee_id = '51032488'
     </select>
+
+    <insert id="seveUser" parameterType="UserModel" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO eating_user (name, gender) values (#{name}, #{gender})
+    </insert>
+
+    <insert id="seveUserFace" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO eating_user (user_id, face_token) values (#{userId}, #{faceToken})
+    </insert>
+
+    <
 
 </mapper>
