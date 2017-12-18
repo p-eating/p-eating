@@ -1,6 +1,6 @@
 package com.chinaredstar.eating.components.constants;
 
-public class FaceURLContants {
+public class FaceApiContants {
 
     /**
      * faceSet create api
