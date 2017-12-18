@@ -34,9 +34,8 @@ public class FaceSetServiceImpl implements IFaceSetService {
     @Override
     public CreateFacesetOutputModel createFaceset(CreateFacesetInputModel createFacesetInputModel) throws Exception {
 
-        String response = post(FaceApiContants.CREATE_FACESET_API, createFacesetInputModel);
 
-        return (CreateFacesetOutputModel) JsonUtil.fromJson(response, CreateFacesetOutputModel.class);
+        return HttpUtils.postBean(FaceApiContants.CREATE_FACESET_API, createFacesetInputModel, CreateFacesetOutputModel.class);
     }
 
     /**
@@ -48,26 +47,9 @@ public class FaceSetServiceImpl implements IFaceSetService {
     @Override
     public GetFacesetsOutputModel getFacesets(GetFacesetsInputModel getFacesetsInputModel) throws Exception {
 
-        String response = post(FaceApiContants.GET_FACESETS_API, getFacesetsInputModel);
 
-        return (GetFacesetsOutputModel) JsonUtil.fromJson(response, GetFacesetsOutputModel.class);
+        return HttpUtils.postBean(FaceApiContants.GET_FACESETS_API, getFacesetsInputModel, GetFacesetsOutputModel.class);
     }
 
-
-    /**
-     * 获取字符
-     *
-     * @param url
-     * @param params
-     * @return
-     * @throws Exception
-     */
-    public String post(String url, Object params) throws Exception {
-        HashMap<String, String> param = (HashMap<String, String>) JsonUtil.fromJson(JsonUtil.toJson(params, false), HashMap.class);
-
-        byte[] postData = HttpUtils.post(url, param, null);
-
-        return new String(postData);
-    }
 
 }
