@@ -1,6 +1,6 @@
 package com.chinaredstar.eating.web.controller;
 
-import com.chinaredstar.eating.model.User;
+import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.service.DemoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class DemoController {
     @RequestMapping("/test")
     public String demo(Model model){
         logger.info(">>>>>>>> -- 进入 DemoController#demo方法");
-        User user = demoService.findUser();
+        UserModel user = demoService.findUser();
         model.addAttribute("hello", user.getName());
         return "/test";
     }

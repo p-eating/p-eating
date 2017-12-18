@@ -1,8 +1,8 @@
 package com.chinaredstar.eating.service;
 
-import com.chinaredstar.eating.model.User;
+import com.chinaredstar.eating.model.UserModel;
 
 public interface DemoService {
 
-    User findUser();
+    UserModel findUser();
 }

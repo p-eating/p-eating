@@ -1,17 +1,17 @@
 package com.chinaredstar.eating.service;
 
-import com.chinaredstar.eating.mapper.DemoMapper;
-import com.chinaredstar.eating.model.User;
+import com.chinaredstar.eating.mapper.UserMapper;
+import com.chinaredstar.eating.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DemoServiceImpl implements DemoService {
     @Autowired
-    private DemoMapper demoMapper;
+    private UserMapper demoMapper;
 
     @Override
-    public User findUser() {
+    public UserModel findUser() {
         return demoMapper.findUser();
     }
 }
