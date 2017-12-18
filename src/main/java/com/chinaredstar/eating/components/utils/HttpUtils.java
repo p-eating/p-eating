@@ -1,5 +1,7 @@
 package com.chinaredstar.eating.components.utils;
 
+import com.chinaredstar.perseus.utils.JsonUtil;
+
 import javax.net.ssl.SSLException;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -112,6 +114,83 @@ public class HttpUtils {
         }
         return null;
     }
+
+
+
+    /**
+     * post 请求，返回指定对象
+     *
+     * @param url
+     * @param params
+     * @param clazz
+     * @param <K>
+     * @return
+     * @throws Exception
+     */
+    public static <K> K postBean(String url, Object params, Class<K> clazz) throws Exception {
+        return postBean(url, params, null, clazz);
+    }
+
+    /**
+     * post 请求，返回指定对象
+     *
+     * @param url
+     * @param params
+     * @param fileMap
+     * @param clazz
+     * @param <K>
+     * @return
+     * @throws Exception
+     */
+    public static <K> K postBean(String url, Object params, HashMap<String, byte[]> fileMap, Class<K> clazz) throws Exception {
+        String response = postString(url, params, fileMap);
+        return (K) JsonUtil.fromJson(response, clazz);
+    }
+
+    /**
+     * post请求，返回字符
+     *
+     * @param url
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public static String postString(String url, Object params) throws Exception {
+        return postString(url, params, null);
+    }
+
+    /**
+     * post请求，返回字符
+     *
+     * @param url
+     * @param params
+     * @param fileMap
+     * @return
+     * @throws Exception
+     */
+    public static String postString(String url, Object params, HashMap<String, byte[]> fileMap) throws Exception {
+        byte[] data = postBytes(url, params, fileMap);
+        return new String(data);
+    }
+
+
+    /**
+     * post请求，获取返回的字节
+     *
+     * @param url
+     * @param params
+     * @param fileMap
+     * @return
+     * @throws Exception
+     */
+    public static byte[] postBytes(String url, Object params, HashMap<String, byte[]> fileMap) throws Exception {
+        HashMap<String, String> param = (HashMap<String, String>) JsonUtil.fromJson(JsonUtil.toJson(params, false), HashMap.class);
+
+        return HttpUtils.post(url, param, fileMap);
+    }
+
+
+
 
     public static void main(String[] args) throws Exception {
 
