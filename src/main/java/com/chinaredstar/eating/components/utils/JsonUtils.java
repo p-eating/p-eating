@@ -2,6 +2,7 @@ package com.chinaredstar.eating.components.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.slf4j.Logger;
@@ -20,6 +21,13 @@ public class JsonUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JsonUtils.class);
 
 
+    private static ObjectMapper getMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper;
+    }
+
+
     /**
      * 将对象的大写转换为下划线加小写，例如：userName-->user_name
      *
@@ -27,7 +35,7 @@ public class JsonUtils {
      * @return
      */
     public static String toUnderlineJsonString(Object object) {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = getMapper();
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         mapper.setSerializationInclusion(Include.NON_NULL);
         String reqJson = null;
@@ -48,7 +56,7 @@ public class JsonUtils {
      * @throws IOException
      */
     public static <T> T toSnakeBean(String json, Class<T> clazz) {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = getMapper();
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         T reqJson = null;
         try {
@@ -66,7 +74,7 @@ public class JsonUtils {
      * @throws IOException
      */
     public static <T> T toBean(String json, Class<T> clazz) {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = getMapper();
         T reqJson = null;
         try {
             reqJson = mapper.readValue(json, clazz);
