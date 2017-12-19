@@ -50,6 +50,11 @@
             <artifactId>pagehelper</artifactId>
             <version>4.1.6</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
 
     </dependencies>
     <build>
