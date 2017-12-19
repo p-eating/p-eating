@@ -20,5 +20,6 @@ public class ApplicationMain {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ApplicationMain.class, args);
+        System.out.println("p-eating start success ...");
     }
 }
