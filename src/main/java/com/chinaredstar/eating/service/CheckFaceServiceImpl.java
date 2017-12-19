@@ -29,19 +29,17 @@ public class CheckFaceServiceImpl implements CheckFaceService{
     private static final Logger logger = LoggerFactory.getLogger(CheckFaceServiceImpl.class);
     private static final double CONFIDENCE = 80;
     @Override
-    public RestResultVo checkFace(String base64,byte[] img) {
+    public RestResultVo checkFace(String base64) {
         HashMap<String, String> map = new HashMap<>();
-        HashMap<String, byte[]> byteMap = new HashMap<>();
         map.put("api_key", FaceApiContants.API_KEY);
         map.put("api_secret", FaceApiContants.API_SECRET);
         map.put("faceset_token", FaceApiContants.FACESET_TOKEN);
         map.put("image_base64", base64);
-        byteMap.put("image_file", img);
         byte[] byteResult;
         try{
             //请求face++
             long start = System.currentTimeMillis();
-            byteResult = HttpUtils.post(FaceApiContants.SEARCH_FACE_API, map, img==null?null:byteMap);
+            byteResult = HttpUtils.post(FaceApiContants.SEARCH_FACE_API, map, null);
             logger.info("请求数据所花时间："+(System.currentTimeMillis()-start));
         }catch (Exception e) {
             logger.error("请求失败。",e);

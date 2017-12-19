@@ -8,5 +8,5 @@ import com.chinaredstar.eating.model.common.RestResultVo;
  * @Description:
  */
 public interface CheckFaceService {
-    public RestResultVo checkFace(String base64,byte[] file);
+    public RestResultVo checkFace(String base64);
 }
