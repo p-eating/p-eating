@@ -1,6 +1,9 @@
 package com.chinaredstar.eating.components.utils;
 
-import com.chinaredstar.perseus.utils.JsonUtil;
+import com.chinaredstar.eating.model.common.CommonOutputModel;
+import com.chinaredstar.eating.web.exception.EatingException;
+import com.chinaredstar.eating.web.exception.EatingExceptionCodeEnum;
+import org.springframework.util.StringUtils;
 
 import javax.net.ssl.SSLException;
 import java.io.*;
@@ -170,7 +173,15 @@ public class HttpUtils {
      */
     public static String postString(String url, Object params, HashMap<String, byte[]> fileMap) throws Exception {
         byte[] data = postBytes(url, params, fileMap);
-        return new String(data);
+        String response = new String(data);
+
+        //统一处理 业务异常
+        CommonOutputModel commonOutputModel = JsonUtils.toSnakeBean(response, CommonOutputModel.class);
+        if (commonOutputModel != null && !StringUtils.isEmpty(commonOutputModel.getErrorMessage())) {
+            throw new EatingException(EatingExceptionCodeEnum.FACE_SERVICE_EXCEPTION, commonOutputModel.getErrorMessage());
+        }
+
+        return response;
     }
 
 
@@ -183,7 +194,7 @@ public class HttpUtils {
      * @return
      * @throws Exception
      */
-    public static byte[] postBytes(String url, Object params, HashMap<String, byte[]> fileMap) throws Exception {
+    protected static byte[] postBytes(String url, Object params, HashMap<String, byte[]> fileMap) throws Exception {
         HashMap<String, String> param = JsonUtils.toBean(JsonUtils.toUnderlineJsonString(params), HashMap.class);
 
         return HttpUtils.post(url, param, fileMap);
