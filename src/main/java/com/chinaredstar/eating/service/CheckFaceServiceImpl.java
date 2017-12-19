@@ -6,6 +6,7 @@ import com.chinaredstar.eating.mapper.UserMapper;
 import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.model.common.RestResultVo;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,13 +47,23 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         String str = new String(byteResult);
         JSONObject resultObject = new JSONObject(str);
         //先获取error信息;
-        String errorMessage = resultObject.getString("error_message");
+        Object errorMessage = null;
+        try {
+            errorMessage = resultObject.get("error_message");
+        } catch (JSONException e) {
+
+        }
         //如果含有error信息表示请求失败。
         if(!StringUtils.isEmpty(errorMessage)){
-            return new RestResultVo(-1,errorMessage);
+            return new RestResultVo(-1,errorMessage.toString());
         }
         //获取返回结果
-        JSONArray jsonArray = resultObject.getJSONArray("results");
+        JSONArray jsonArray;
+        try {
+            jsonArray = resultObject.getJSONArray("results");
+        } catch (JSONException e) {
+            return new RestResultVo(-1,"人脸识别失败。");
+        }
         //如果结果为空
         if(jsonArray==null||jsonArray.length()<=0){
             return new RestResultVo(-1,"人脸识别失败。");
@@ -71,7 +82,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
             return new RestResultVo(-1,"数据库连接失败。");
         }
         if(null == user){
-            return new RestResultVo(-1,"无法匹配用户信息。");
+            return new RestResultVo(-2,"用户不存在。");
         }
         return RestResultVo.getResult(user);
     }
