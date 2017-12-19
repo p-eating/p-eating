@@ -10,28 +10,27 @@ import com.chinaredstar.eating.model.common.CommonInputModel;
  */
 public class CreateFacesetInputModel extends CommonInputModel {
 
-    private String display_name;
-    private String outer_id;
+    private String displayName;
+    private String outerId;
     private String tags;
-    private String face_tokens;
-    private String user_data;
-    private String force_merge = "0";
+    private String faceTokens;
+    private String userData;
+    private String forceMerge = "0";
 
-
-    public String getDisplay_name() {
-        return display_name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setDisplay_name(String display_name) {
-        this.display_name = display_name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
-    public String getOuter_id() {
-        return outer_id;
+    public String getOuterId() {
+        return outerId;
     }
 
-    public void setOuter_id(String outer_id) {
-        this.outer_id = outer_id;
+    public void setOuterId(String outerId) {
+        this.outerId = outerId;
     }
 
     public String getTags() {
@@ -42,27 +41,27 @@ public class CreateFacesetInputModel extends CommonInputModel {
         this.tags = tags;
     }
 
-    public String getFace_tokens() {
-        return face_tokens;
+    public String getFaceTokens() {
+        return faceTokens;
     }
 
-    public void setFace_tokens(String face_tokens) {
-        this.face_tokens = face_tokens;
+    public void setFaceTokens(String faceTokens) {
+        this.faceTokens = faceTokens;
     }
 
-    public String getUser_data() {
-        return user_data;
+    public String getUserData() {
+        return userData;
     }
 
-    public void setUser_data(String user_data) {
-        this.user_data = user_data;
+    public void setUserData(String userData) {
+        this.userData = userData;
     }
 
-    public String getForce_merge() {
-        return force_merge;
+    public String getForceMerge() {
+        return forceMerge;
     }
 
-    public void setForce_merge(String force_merge) {
-        this.force_merge = force_merge;
+    public void setForceMerge(String forceMerge) {
+        this.forceMerge = forceMerge;
     }
 }

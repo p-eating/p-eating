@@ -8,7 +8,7 @@ package com.chinaredstar.eating.model.faceset;
  */
 public class FailureDetailModel {
     private String reason;
-    private String face_token;
+    private String faceToken;
 
     public String getReason() {
         return reason;
@@ -18,11 +18,11 @@ public class FailureDetailModel {
         this.reason = reason;
     }
 
-    public String getFace_token() {
-        return face_token;
+    public String getFaceToken() {
+        return faceToken;
     }
 
-    public void setFace_token(String face_token) {
-        this.face_token = face_token;
+    public void setFaceToken(String faceToken) {
+        this.faceToken = faceToken;
     }
 }

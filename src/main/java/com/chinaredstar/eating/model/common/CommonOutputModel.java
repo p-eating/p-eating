@@ -10,34 +10,34 @@ package com.chinaredstar.eating.model.common;
 public class CommonOutputModel {
 
 
-    private String request_id;
+    private String requestId;
 
-    private String time_used;
+    private String timeUsed;
 
-    private String error_message;
+    private String errorMessage;
 
-    public String getRequest_id() {
-        return request_id;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public void setRequest_id(String request_id) {
-        this.request_id = request_id;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
-
-    public String getTime_used() {
-        return time_used;
+    public String getTimeUsed() {
+        return timeUsed;
     }
 
-    public void setTime_used(String time_used) {
-        this.time_used = time_used;
+    public void setTimeUsed(String timeUsed) {
+        this.timeUsed = timeUsed;
     }
 
-    public String getError_message() {
-        return error_message;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setError_message(String error_message) {
-        this.error_message = error_message;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
+
 }

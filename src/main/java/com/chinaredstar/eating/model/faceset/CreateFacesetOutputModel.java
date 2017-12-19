@@ -12,54 +12,52 @@ import java.util.List;
  */
 public class CreateFacesetOutputModel extends CommonOutputModel {
 
-    private String faceset_token;
-    private String outer_id;
+    private String facesetToken;
+    private String outerId;
 
-    private String face_added;
-    private String face_count;
+    private String faceAdded;
+    private String faceCount;
 
-    private List<FailureDetailModel> failure_detail;
+    private List<FailureDetailModel> failureDetail;
 
 
-    public String getFaceset_token() {
-        return faceset_token;
+    public String getFacesetToken() {
+        return facesetToken;
     }
 
-    public void setFaceset_token(String faceset_token) {
-        this.faceset_token = faceset_token;
+    public void setFacesetToken(String facesetToken) {
+        this.facesetToken = facesetToken;
     }
 
-    public String getOuter_id() {
-        return outer_id;
+    public String getOuterId() {
+        return outerId;
     }
 
-    public void setOuter_id(String outer_id) {
-        this.outer_id = outer_id;
+    public void setOuterId(String outerId) {
+        this.outerId = outerId;
     }
 
-    public String getFace_added() {
-        return face_added;
+    public String getFaceAdded() {
+        return faceAdded;
     }
 
-    public void setFace_added(String face_added) {
-        this.face_added = face_added;
+    public void setFaceAdded(String faceAdded) {
+        this.faceAdded = faceAdded;
     }
 
-    public String getFace_count() {
-        return face_count;
+    public String getFaceCount() {
+        return faceCount;
     }
 
-    public void setFace_count(String face_count) {
-        this.face_count = face_count;
+    public void setFaceCount(String faceCount) {
+        this.faceCount = faceCount;
     }
 
-    public List<FailureDetailModel> getFailure_detail() {
-        return failure_detail;
+    public List<FailureDetailModel> getFailureDetail() {
+        return failureDetail;
     }
 
-    public void setFailure_detail(List<FailureDetailModel> failure_detail) {
-        this.failure_detail = failure_detail;
+    public void setFailureDetail(List<FailureDetailModel> failureDetail) {
+        this.failureDetail = failureDetail;
     }
-
-
 }

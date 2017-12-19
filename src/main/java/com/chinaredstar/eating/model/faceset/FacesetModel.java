@@ -8,33 +8,34 @@ package com.chinaredstar.eating.model.faceset;
  */
 public class FacesetModel {
 
-    private String faceset_token;
-    private String outer_id;
-    private String display_name;
+
+    private String facesetToken;
+    private String outerId;
+    private String displayName;
     private String tags;
 
-    public String getFaceset_token() {
-        return faceset_token;
+    public String getFacesetToken() {
+        return facesetToken;
     }
 
-    public void setFaceset_token(String faceset_token) {
-        this.faceset_token = faceset_token;
+    public void setFacesetToken(String facesetToken) {
+        this.facesetToken = facesetToken;
     }
 
-    public String getOuter_id() {
-        return outer_id;
+    public String getOuterId() {
+        return outerId;
     }
 
-    public void setOuter_id(String outer_id) {
-        this.outer_id = outer_id;
+    public void setOuterId(String outerId) {
+        this.outerId = outerId;
     }
 
-    public String getDisplay_name() {
-        return display_name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setDisplay_name(String display_name) {
-        this.display_name = display_name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getTags() {
