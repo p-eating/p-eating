@@ -40,4 +40,12 @@ public class FaceApiContants {
     public static final String SEARCH_FACE_API = "https://api-cn.faceplusplus.com/facepp/v3/search";
 
 
+    /**
+     * @description: 传入图片进行人脸检测和人脸分析 API。
+     * @author: chaoyue
+     * @return: 
+     * @date: Create in 10:47 2017/12/19
+     * @modified by: 
+     */
+    public static final String CREATE_DETECT_API = "https://api-cn.faceplusplus.com/facepp/v3/detect";
 }

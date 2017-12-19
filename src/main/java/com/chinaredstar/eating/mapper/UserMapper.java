@@ -1,6 +1,6 @@
 package com.chinaredstar.eating.mapper;
 
-import com.chinaredstar.eating.model.UserModel;
+import com.chinaredstar.eating.model.user.UserModel;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
