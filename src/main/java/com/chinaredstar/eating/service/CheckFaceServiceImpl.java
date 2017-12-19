@@ -39,7 +39,9 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         byte[] byteResult;
         try{
             //请求face++
+            long start = System.currentTimeMillis();
             byteResult = HttpUtils.post(FaceApiContants.SEARCH_FACE_API, map, byteMap);
+            logger.info("请求数据所花时间："+(System.currentTimeMillis()-start));
         }catch (Exception e) {
             logger.error("请求失败。",e);
             return new RestResultVo(-1,"请求失败。");
@@ -76,7 +78,9 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         }
         UserModel user;
         try {
+            long dbStart = System.currentTimeMillis();
             user = userMapper.findUserByFaceToken(faceToken);
+            logger.info("db操作所花时间："+(System.currentTimeMillis()-dbStart));
         } catch (Exception e) {
             logger.error("数据库连接失败。",e);
             return new RestResultVo(-1,"数据库连接失败。");
