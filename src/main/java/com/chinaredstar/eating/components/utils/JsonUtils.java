@@ -20,9 +20,9 @@ import java.io.IOException;
 public class JsonUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JsonUtils.class);
 
+    private static ObjectMapper mapper = new ObjectMapper();
 
     private static ObjectMapper getMapper() {
-        ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }
@@ -67,7 +67,28 @@ public class JsonUtils {
         return reqJson;
     }
 
+
     /**
+     * 对象转jsonString
+     *
+     * @param object
+     * @return
+     */
+    public static String toJsonString(Object object) {
+        ObjectMapper mapper = getMapper();
+        mapper.setSerializationInclusion(Include.NON_NULL);
+        String reqJson = null;
+        try {
+            reqJson = mapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            LOG.error("toJsonString error:[{}] ", e);
+        }
+        return reqJson;
+    }
+
+    /**
+     * jsonString对象转
+     *
      * @param json
      * @param clazz
      * @return
@@ -83,4 +104,5 @@ public class JsonUtils {
         }
         return reqJson;
     }
+
 }
