@@ -1,7 +1,7 @@
 package com.chinaredstar.eating.service.user;
 
 import com.chinaredstar.eating.model.common.CommonInputModel;
-import com.chinaredstar.eating.model.user.UserModel;
+import com.chinaredstar.eating.model.UserModel;
 
 import java.io.InputStream;
 

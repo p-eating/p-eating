@@ -10,7 +10,7 @@ import com.chinaredstar.eating.model.EatingUserModel;
 import com.chinaredstar.eating.model.common.CommonInputModel;
 import com.chinaredstar.eating.model.user.DetectFaceResultModel;
 import com.chinaredstar.eating.model.user.DetectResultModel;
-import com.chinaredstar.eating.model.user.UserModel;
+import com.chinaredstar.eating.model.UserModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

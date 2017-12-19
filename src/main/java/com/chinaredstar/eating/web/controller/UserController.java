@@ -2,7 +2,7 @@ package com.chinaredstar.eating.web.controller;
 
 import com.chinaredstar.eating.model.common.CommonInputModel;
 import com.chinaredstar.eating.model.common.RestResultVo;
-import com.chinaredstar.eating.model.user.UserModel;
+import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

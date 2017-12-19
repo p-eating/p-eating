@@ -3,7 +3,6 @@ package com.chinaredstar.eating.service;
 import com.chinaredstar.eating.components.constants.FaceApiContants;
 import com.chinaredstar.eating.components.utils.HttpUtils;
 import com.chinaredstar.eating.mapper.UserMapper;
-import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.model.common.RestResultVo;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,7 +75,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         if(confidence < CONFIDENCE){
             return new RestResultVo(-1,"无法匹配脸部信息。");
         }
-        UserModel user;
+     /*   UserModel user;
         try {
             long dbStart = System.currentTimeMillis();
             user = userMapper.findUserByFaceToken(faceToken);
@@ -88,6 +87,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         if(null == user){
             return new RestResultVo(-2,"用户不存在。");
         }
-        return RestResultVo.getResult(user);
+        return RestResultVo.getResult(user);*/
+     return null;
     }
 }
