@@ -12,23 +12,24 @@ import com.chinaredstar.eating.components.constants.FaceApiContants;
 public class CommonInputModel {
 
 
-    private String api_key = FaceApiContants.API_KEY;
+    private String apiKey = FaceApiContants.API_KEY;
 
-    private String api_secret = FaceApiContants.API_SECRET;
+    private String apiSecret = FaceApiContants.API_SECRET;
 
-    public String getApi_key() {
-        return api_key;
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public void setApi_key(String api_key) {
-        this.api_key = api_key;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
-    public String getApi_secret() {
-        return api_secret;
+    public String getApiSecret() {
+        return apiSecret;
     }
 
-    public void setApi_secret(String api_secret) {
-        this.api_secret = api_secret;
+    public void setApiSecret(String apiSecret) {
+        this.apiSecret = apiSecret;
     }
+
 }

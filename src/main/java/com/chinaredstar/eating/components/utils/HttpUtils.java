@@ -116,7 +116,6 @@ public class HttpUtils {
     }
 
 
-
     /**
      * post 请求，返回指定对象
      *
@@ -144,7 +143,8 @@ public class HttpUtils {
      */
     public static <K> K postBean(String url, Object params, HashMap<String, byte[]> fileMap, Class<K> clazz) throws Exception {
         String response = postString(url, params, fileMap);
-        return (K) JsonUtil.fromJson(response, clazz);
+
+        return JsonUtils.toSnakeBean(response, clazz);
     }
 
     /**
@@ -184,12 +184,10 @@ public class HttpUtils {
      * @throws Exception
      */
     public static byte[] postBytes(String url, Object params, HashMap<String, byte[]> fileMap) throws Exception {
-        HashMap<String, String> param = (HashMap<String, String>) JsonUtil.fromJson(JsonUtil.toJson(params, false), HashMap.class);
+        HashMap<String, String> param = JsonUtils.toBean(JsonUtils.toUnderlineJsonString(params), HashMap.class);
 
         return HttpUtils.post(url, param, fileMap);
     }
-
-
 
 
     public static void main(String[] args) throws Exception {
