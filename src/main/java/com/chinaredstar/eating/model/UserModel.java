@@ -17,11 +17,12 @@ public class UserModel extends CommonInputModel implements Serializable {
 
     private String facesetToken = FaceApiContants.FACESET_TOKEN;
 
+    private String imageBase64 ;
     //用户名
     private String name;
 
     //性别
-    private int gender;
+    private String gender;
 
     public String getName() {
         return name;
@@ -31,11 +32,11 @@ public class UserModel extends CommonInputModel implements Serializable {
         this.name = name;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -45,5 +46,13 @@ public class UserModel extends CommonInputModel implements Serializable {
 
     public void setFacesetToken(String facesetToken) {
         this.facesetToken = facesetToken;
+    }
+
+    public String getImageBase64() {
+        return imageBase64;
+    }
+
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
     }
 }

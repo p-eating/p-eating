@@ -22,6 +22,57 @@
     <!--[if lt IE 9]>
     <script src="/js/respond.min.js"></script>
     <![endif]-->
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Placeholder -->
+    <script src="/js/jquery.placeholder.min.js"></script>
+    <!-- Waypoints -->
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <!-- Main JS -->
+    <script src="/js/main.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btn").click(function () {
+                var username = $("#name").val();
+                var gender = $("[name='gender']:checked").val();
+                if (username == '') {
+                    alert("请输入你的名字");
+                    return;
+                }
+                doPost(username, gender);
+            });
+            var count = 0;
+
+            function doPost(u, g) {
+                if (count > 4) {
+                    alert("请求超时");
+                    return;
+                }
+                $.ajax({
+                    type: "post",                      //请求类型
+                    url: "/user/create",           //URL
+                    data: {name: u, gender: g},   //传递的参数
+                    dataType: "json",                 //返回的数据类型
+                    success: function (data) {          //data就是返回的json类型的数据
+                        if (data.code == -1) {
+                            doPost(u, g);
+                            count++;
+                        } else if (data.code == 200) {
+                            alert("录入成功");
+                            $("#name").val("");
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (data) {
+                        alert("请求失败");
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -40,31 +91,28 @@
                     <div type="text" id="camera"></div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username" placeholder="姓名" autocomplete="off"/>
+                    <input type="text" class="form-control" id="name" placeholder="姓名" autocomplete="off"
+                           maxlength="10"/>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password" placeholder="性别" autocomplete="off"/>
+                <div class="form-group radio">
+                    <span class="tip">性别</span>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="gender" value="1" autocomplete="off" checked="checked"/> 男
+                        </label>
+                        <span class="line">|</span>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="gender" value="0" autocomplete="off"/> 女
+                        </label>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="确定录入" class="btn btn-primary comfirm-btn"/>
+                <div class="form-group operation">
+                    <input type="button" id="btn" value="确定录入" class="btn btn-primary comfirm-btn"/>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="/js/bootstrap.min.js"></script>
-<!-- Placeholder -->
-<script src="/js/jquery.placeholder.min.js"></script>
-<!-- Waypoints -->
-<script src="/js/jquery.waypoints.min.js"></script>
-<!-- Main JS -->
-<script src="/js/main.js"></script>
-
-
 </body>
 </html>
 

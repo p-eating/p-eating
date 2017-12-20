@@ -163,7 +163,10 @@ a:hover {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.btn-primary {
+.operation{
+  margin-top: 10px;
+}
+.operation .btn-primary {
   height: 50px;
   padding-right: 20px;
   padding-left: 20px;
@@ -176,7 +179,7 @@ a:hover {
   -o-box-shadow: -2px 10px 20px -1px rgba(51, 204, 204, 0.4);
   box-shadow: -2px 10px 20px -1px rgba(51, 204, 204, 0.4);
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+.operation .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #ffffff;
   background: #47d1d1 !important;
   outline: none;
@@ -206,4 +209,58 @@ input, textarea {
   height: 200px;
   display: inline-block;
   background: url(../images/camera.svg) no-repeat center center;
+}
+
+.radio{
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.radio .tip{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  font-weight: 300;
+  color: rgba(85, 85, 85,.4);
+  line-height: 50px;
+}
+.radio .btn-group, .btn-group-vertical{
+  height: 50px;
+  display: block;
+  width: calc(100% - 50px);
+  float: right;
+}
+.radio .btn-primary{
+  background-color:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  color: #aaa;
+  outline: none;
+}
+.radio .btn-primary.active{
+  background-color:transparent !important;
+  color: #33cccc;
+  border:none !important;
+  outline: none;
+}
+.radio .btn-primary:hover{
+  background-color:transparent !important;
+  color: #33cccc;
+  border:none !important;
+  outline: none;
+}
+.radio .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle){
+  width: calc((100% - 50px) / 2.0);
+  height: 50px;
+  line-height: 40px;
+}
+.radio .btn-group>.btn:last-child:not(:first-child), .radio  .btn-group>.dropdown-toggle:not(:first-child){
+  width: calc((100% - 50px) / 2.0);
+  height: 50px;
+  line-height: 40px;
+}
+.radio .line{
+  position: relative;
+  float: left;
+  color: rgba(0, 0, 0, 0.1);
+  height: 50px;
+  line-height: 50px;
 }

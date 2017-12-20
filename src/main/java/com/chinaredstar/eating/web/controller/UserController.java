@@ -28,15 +28,20 @@ public class UserController {
     private UserService userServiceImpl;
 
 
-    @RequestMapping(value = "/create", method = {RequestMethod.POST})
-    public RestResultVo<Object> create(UserModel model, @RequestParam("file") MultipartFile file) throws Exception {
+    @RequestMapping(value = "/createFile", method = {RequestMethod.POST})
+    public RestResultVo<Object> createFile(UserModel model,@RequestParam("file") MultipartFile file) throws Exception {
         userServiceImpl.createUser(model,file.getInputStream());
         return new RestResultVo("success");
+    }
 
+    @RequestMapping(value = "/create", method = {RequestMethod.POST})
+    public RestResultVo<Object> create(UserModel model) throws Exception {
+        userServiceImpl.createUser(model,null);
+        return new RestResultVo("success");
     }
 
     @RequestMapping(value = "/detect", method = {RequestMethod.POST})
-    public RestResultVo<Object> detect(CommonInputModel model, @RequestParam("file") MultipartFile file) throws Exception {
+    public RestResultVo<Object> detect(UserModel model,MultipartFile file) throws Exception {
         return new RestResultVo(userServiceImpl.detectImage(model,file.getInputStream()));
 
     }

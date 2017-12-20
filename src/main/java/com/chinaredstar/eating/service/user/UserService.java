@@ -33,5 +33,5 @@ public interface UserService {
      * @date: Create in 10:36 2017/12/19
      * @modified by:
      */
-    String detectImage(CommonInputModel model, InputStream imageFile)  throws Exception ;
+    String detectImage(UserModel model, InputStream imageFile)  throws Exception ;
 }
