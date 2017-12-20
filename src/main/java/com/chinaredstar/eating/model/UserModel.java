@@ -1,6 +1,5 @@
 package com.chinaredstar.eating.model;
 
-import com.chinaredstar.eating.components.constants.FaceApiContants;
 import com.chinaredstar.eating.model.common.CommonInputModel;
 
 import java.io.Serializable;
