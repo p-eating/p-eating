@@ -32,8 +32,48 @@
     <script src="/js/jquery.waypoints.min.js"></script>
     <!-- Main JS -->
     <script src="/js/main.js"></script>
+
+    <script type="text/javascript" src="/js/jquery.facedetection.js"></script>
     <script type="text/javascript">
         $(function () {
+
+
+            var dataBase64 = '';
+
+            var video = document.getElementById('video'),
+                    canvas = document.getElementById('canvas'),
+                    snap = document.getElementById('tack'),
+                    vendorUrl = window.URL || window.webkitURL;
+
+            //媒体对象
+            navigator.getMedia = navigator.getUserMedia ||
+                    navagator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msGetUserMedia;
+            navigator.getMedia({
+                video: true, //使用摄像头对象
+                audio: false  //不适用音频
+            }, function(strem){
+                console.log(strem);
+                video.src = vendorUrl.createObjectURL(strem);
+                video.play();
+            }, function(error) {
+                //error.code
+                console.log(error);
+            });
+
+            $('#tack').click(function () {
+                canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
+
+                var  dataTmp = canvas.toDataURL('image/png');
+
+                dataBase64 = dataTmp.replace("data:image/png;base64,", "");
+                console.log(dataBase64);
+
+            });
+
+
+
             $("#btn").click(function () {
                 var username = $("#name").val();
                 var gender = $("[name='gender']:checked").val();
@@ -41,11 +81,11 @@
                     alert("请输入你的名字");
                     return;
                 }
-                doPost(username, gender);
+                doPost(username, gender,dataBase64);
             });
             var count = 0;
 
-            function doPost(u, g) {
+            function doPost(u, g,i) {
                 if (count > 4) {
                     alert("请求超时");
                     return;
@@ -53,7 +93,7 @@
                 $.ajax({
                     type: "post",                      //请求类型
                     url: "/user/create",           //URL
-                    data: {name: u, gender: g},   //传递的参数
+                    data: {name: u, gender: g,imageBase64:i},   //传递的参数
                     dataType: "json",                 //返回的数据类型
                     success: function (data) {          //data就是返回的json类型的数据
                         if (data.code == -1) {
@@ -88,7 +128,12 @@
         <div class="col-xs-12 col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
             <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <div class="form-group camera-content">
-                    <div type="text" id="camera"></div>
+                    <div type="text" id="camera">
+                        <video id="video" width="800" height="600"></video>
+                    </div>
+
+                    <canvas id='canvas' width='600' height='400'></canvas>
+                    <button id='tack'> 开始录入 </button>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="name" placeholder="姓名" autocomplete="off"

@@ -48,8 +48,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void createUser(UserModel model, InputStream imageFile) throws Exception {
-        String img = getImageStr("/Users/chaoyue/Downloads/下载.jpeg");
-        model.setImageBase64(img);
         String facesetToken = detectImage(model, imageFile);
         EatingUserModel eatingUserModel = new EatingUserModel();
         eatingUserModel.setGender(Integer.valueOf(model.getGender()));
