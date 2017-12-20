@@ -15,8 +15,6 @@ import java.io.Serializable;
 public class UserModel extends CommonInputModel implements Serializable {
     private static final long serialVersionUID = -4672836717435012491L;
 
-    private String facesetToken = FaceApiContants.FACESET_TOKEN;
-
     private String imageBase64 ;
     //用户名
     private String name;
@@ -39,15 +37,6 @@ public class UserModel extends CommonInputModel implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public String getFacesetToken() {
-        return facesetToken;
-    }
-
-    public void setFacesetToken(String facesetToken) {
-        this.facesetToken = facesetToken;
-    }
-
     public String getImageBase64() {
         return imageBase64;
     }

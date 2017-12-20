@@ -8,6 +8,8 @@ import com.chinaredstar.eating.mapper.EatingUserModelMapper;
 import com.chinaredstar.eating.model.EatingUserFaceModel;
 import com.chinaredstar.eating.model.EatingUserModel;
 import com.chinaredstar.eating.model.UserModel;
+import com.chinaredstar.eating.model.common.CommonOutputModel;
+import com.chinaredstar.eating.model.user.AddFaceModel;
 import com.chinaredstar.eating.model.user.DetectFaceResultModel;
 import com.chinaredstar.eating.model.user.DetectResultModel;
 import com.chinaredstar.eating.web.exception.EatingException;
@@ -51,6 +53,9 @@ public class UserServiceImpl implements UserService {
         String img = getImageStr("/Users/chaoyue/Downloads/下载.jpeg");
         model.setImageBase64(img);
         String facesetToken = detectImage(model, imageFile);
+        AddFaceModel addFaceModel = new AddFaceModel();
+        addFaceModel.setFaceTokens(facesetToken);
+        HttpUtils.postBean(FaceApiContants.ADD_FACE_FACESET_API, addFaceModel, CommonOutputModel.class);
         EatingUserModel eatingUserModel = new EatingUserModel();
         eatingUserModel.setGender(Integer.valueOf(model.getGender()));
         eatingUserModel.setName(model.getName());
