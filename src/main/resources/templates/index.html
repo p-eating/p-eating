@@ -40,6 +40,9 @@
 
             var dataBase64 = '';
 
+            var $cameraContent = $('.camera-content');
+            $('#camera').hide();
+            $('#canvas').hide();
             var video = document.getElementById('video'),
                     canvas = document.getElementById('canvas'),
                     snap = document.getElementById('tack'),
@@ -62,19 +65,19 @@
                 console.log(error);
             });
 
-            $('#tack').click(function () {
-                canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
-
+            $('#play').click(function () {
+                canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
                 var  dataTmp = canvas.toDataURL('image/png');
 
                 dataBase64 = dataTmp.replace("data:image/png;base64,", "");
-                console.log(dataBase64);
-
+                $('#video').hide();
+                $('#play').hide();
+                $('#canvas').show();
             });
 
 
 
-            $("#btn").click(function () {
+            $("#create-user").click(function () {
                 var username = $("#name").val();
                 var gender = $("[name='gender']:checked").val();
                 if (username == '') {
@@ -97,7 +100,7 @@
                     dataType: "json",                 //返回的数据类型
                     success: function (data) {          //data就是返回的json类型的数据
                         if (data.code == -1) {
-                            doPost(u, g);
+                            doPost(u, g,i);
                             count++;
                         } else if (data.code == 200) {
                             alert("录入成功");
@@ -126,14 +129,14 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
-            <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+            <div class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <div class="form-group camera-content">
-                    <div type="text" id="camera">
-                        <video id="video" width="800" height="600"></video>
-                    </div>
-
-                    <canvas id='canvas' width='600' height='400'></canvas>
-                    <button id='tack'> 开始录入 </button>
+                    <div type="text" id="camera"></div>
+                    <video id="video"></video>
+                    <canvas id='canvas' width="640px" height="480px"> </canvas>
+                </div>
+                <div class="form-group">
+                    <input type="button" id="play" value="开始录入" class="btn btn-primary comfirm-btn"/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="name" placeholder="姓名" autocomplete="off"
@@ -152,9 +155,9 @@
                     </div>
                 </div>
                 <div class="form-group operation">
-                    <input type="button" id="btn" value="确定录入" class="btn btn-primary comfirm-btn"/>
+                    <input type="button" id="create-user" value="确定录入" class="btn btn-primary comfirm-btn"/>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
