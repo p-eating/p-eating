@@ -1,10 +1,10 @@
 $(function(){
 
+    var imgdada = '';
 
     var w = 320, h = 240;                                       //摄像头配置,创建canvas
     var pos = 0, ctx = null, saveCB, image = [];
-    var canvas = document.createElement("canvas");
-    $("body").append(canvas);
+    var canvas = document.getElementById("canvas");
     canvas.setAttribute('width', w);
     canvas.setAttribute('height', h);
     ctx = canvas.getContext("2d");
@@ -20,7 +20,9 @@ $(function(){
                 $("#status").text("拍照成功!");
             }
         },
-        onSave: function(data){              //保存图像
+        onSave: function(data){
+
+            //保存图像
             var col = data.split(";");
             var img = image;
             for(var i = 0; i < w; i++) {
@@ -32,49 +34,191 @@ $(function(){
                 pos+= 4;
             }
             if (pos >= 4 * w * h) {
+
                 ctx.putImageData(img,0,0);      //转换图像数据，渲染canvas
                 pos = 0;
-                console.log(canvas.toDataURL(""));
-//                Imagedata =canvas.toDataURL().substring(22);  //上传给后台的图片数据
+                Imagedata =canvas.toDataURL().substring(22);  //上传给后台的图片数据
                 var Imagedata =canvas.toDataURL('image/png');  //上传给后台的图片数据
 
 
-                var req = {
-                    image:Imagedata
-                }
-                $.ajax({
-                    type : "POST",
-                    url : '/face/checkFace',
-                    contentType:'application/json; charset=utf-8',
-                    data : JSON.stringify(req),
-                    timeout : 60000,
-                    success : function(data){
+                imgdada = Imagedata.replace('data:image/png;base64,','');
 
-                        console.log(data);
 
-                    }
-                });
+
+//                 var req = {
+//                     image:imgdada
+//                 }
+//                 $.ajax({
+//                     type : "POST",
+//                     url : '/photo/upload',
+//                     // contentType:'application/json; charset=utf-8',
+//                     data : req,
+//                     timeout : 60000,
+//                     success : function(data){
+//
+//                         console.log(data);
+//
+//                     }
+//                 });
+
+                /*$.ajax({
+                 type : "POST",
+                 url : '/face/checkFace',
+                 contentType:'application/json; charset=utf-8',
+                 data : JSON.stringify(req),
+                 timeout : 60000,
+                 success : function(data){
+
+                 console.log(data);
+
+                 }
+                 });*/
 
 
             }
         },
-        onCapture: function () {               //捕获图像
+        onCapture: function (data) {               //捕获图像
             webcam.save();
+
+            // convertCanvasToImage($('#canvas'));
         },
         debug: function (type, string) {       //控制台信息
             console.log(type + ": " + string);
         },
-        onLoad: function() {                   //flash 加载完毕执行
-            console.log('加载完毕！')
-            var cams = webcam.getCameraList();
-            for(var i in cams) {
-                $("body").append("<p>" + cams[i] + "</p>");
-            }
+        onLoad: function(dada) {
+
+
+            // window.setTimeout(timeout, 1000);
         }
     });
 
     $(".play").click(function(){
-        webcam.capture(2);        //拍照，参数5是倒计时
+       var datas = getImageData();
+
+        var src = document.getElementById("canvas").toDataURL("image/png");
+        // console.log(src);
+        $('#img').attr('src',src);
     });
 
+
+    function getImageData() {
+
+        webcam.capture(0);        //拍照，参数5是倒计时
+        window.setTimeout(function () {
+            console.log('....')
+        },500);
+
+        return imgdada;
+    }
+
+
+
+
+
+    // $(".play").click(function(){
+    //     webcam.capture(0);        //拍照，参数5是倒计时
+    //     window.setTimeout(function () {
+    //       console.log('....')
+    //     },500);
+    //     console.log(imgdada);
+    // });
+
+    function convertCanvasToImage() {
+        var src = document.getElementById("canvas").toDataURL("image/png");
+        $('#img').attr('src',src);
+    }
+
+    $('#disti').click(function () {
+        $('#canvas').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸')
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("canvas有人脸");
+                    flag = true;
+                }
+            },
+            error: function (code, message) {
+                alert("complete回调函数出错");
+            }
+        });
+
+
+        $('#img').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸')
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("img有人脸");
+                    flag = true;
+                }
+            },
+            error: function (code, message) {
+                alert("complete回调函数出错")
+            }
+        });
+    });
+
+
 });
+
+
+
+
+function face() {
+    var flag = false;
+    $('#canvas').faceDetection({
+        complete: function (faces) {
+
+            if (faces.length == 0) { //说明没有检测到人脸
+                // alert("无人脸")
+                console.log('无人脸')
+            } else {
+
+                for (var i in faces) {
+                    draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                    // var leftTop = [faces[i].x, faces[i].y];
+                    //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                }
+                console.log("有人脸")
+                flag = true;
+            }
+        },
+        error: function (code, message) {
+            alert("complete回调函数出错")
+        }
+    });
+
+    return flag;
+}
+
+
+//画方框
+function draw(x, y, w, h) {
+    var img = document.getElementById("image");
+    // var rect = document.getElementById("imgContainer");
+    var rect = document.createElement('div');
+    document.querySelector('.imgContainer').appendChild(rect);
+    rect.classList.add('rect');
+    rect.style.width = w + 'px';
+    rect.style.height = h + 'px';
+    rect.style.left = (img.offsetLeft + x) + 'px';
+    rect.style.top = (img.offsetTop + y) + 'px';
+};
+
