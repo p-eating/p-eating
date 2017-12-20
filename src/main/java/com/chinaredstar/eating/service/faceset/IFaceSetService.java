@@ -1,9 +1,6 @@
 package com.chinaredstar.eating.service.faceset;
 
-import com.chinaredstar.eating.model.faceset.CreateFacesetInputModel;
-import com.chinaredstar.eating.model.faceset.CreateFacesetOutputModel;
-import com.chinaredstar.eating.model.faceset.GetFacesetsInputModel;
-import com.chinaredstar.eating.model.faceset.GetFacesetsOutputModel;
+import com.chinaredstar.eating.model.faceset.*;
 
 /**
  * @description: faceset
@@ -30,6 +27,14 @@ public interface IFaceSetService {
      * @return
      */
     GetFacesetsOutputModel getFacesets(GetFacesetsInputModel getFacesetsInputModel) throws Exception;
+
+    /**
+     * 获取facesets中faceTokens
+     *
+     * @param getFacesetsDetailInputModel
+     * @return
+     */
+    GetFacesetsDetailOutputModel getFacesets(GetFacesetsDetailInputModel getFacesetsDetailInputModel) throws Exception;
 
 
 }

@@ -25,6 +25,11 @@ public class FaceApiContants {
     public static final String CREATE_FACESET_API = "https://api-cn.faceplusplus.com/facepp/v3/faceset/create";
 
     /**
+     * faceSet get facesets detail
+     */
+    public static final String GET_DETAIL_FACESETS_API = "https://api-cn.faceplusplus.com/facepp/v3/faceset/getdetail";
+
+    /**
      * faceSet get facesets
      */
     public static final String GET_FACESETS_API = "https://api-cn.faceplusplus.com/facepp/v3/faceset/getfacesets";
@@ -43,9 +48,9 @@ public class FaceApiContants {
     /**
      * @description: 传入图片进行人脸检测和人脸分析 API。
      * @author: chaoyue
-     * @return: 
+     * @return:
      * @date: Create in 10:47 2017/12/19
-     * @modified by: 
+     * @modified by:
      */
     public static final String CREATE_DETECT_API = "https://api-cn.faceplusplus.com/facepp/v3/detect";
 }

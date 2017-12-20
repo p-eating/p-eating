@@ -2,10 +2,7 @@ package com.chinaredstar.eating.service.faceset;
 
 import com.chinaredstar.eating.components.constants.FaceApiContants;
 import com.chinaredstar.eating.components.utils.HttpUtils;
-import com.chinaredstar.eating.model.faceset.CreateFacesetInputModel;
-import com.chinaredstar.eating.model.faceset.CreateFacesetOutputModel;
-import com.chinaredstar.eating.model.faceset.GetFacesetsInputModel;
-import com.chinaredstar.eating.model.faceset.GetFacesetsOutputModel;
+import com.chinaredstar.eating.model.faceset.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -47,6 +44,18 @@ public class FaceSetServiceImpl implements IFaceSetService {
 
 
         return HttpUtils.postBean(FaceApiContants.GET_FACESETS_API, getFacesetsInputModel, GetFacesetsOutputModel.class);
+    }
+
+    /**
+     * 获取facesets中faceTokens
+     *
+     * @param getFacesetsDetailInputModel
+     * @return
+     */
+    @Override
+    public GetFacesetsDetailOutputModel getFacesets(GetFacesetsDetailInputModel getFacesetsDetailInputModel) throws Exception {
+
+        return HttpUtils.postBean(FaceApiContants.GET_DETAIL_FACESETS_API, getFacesetsDetailInputModel, GetFacesetsDetailOutputModel.class);
     }
 
 
