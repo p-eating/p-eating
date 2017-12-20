@@ -94,7 +94,10 @@ $(function(){
 
     $(".play").click(function(){
        var datas = getImageData();
-        console.log(datas);
+
+        var src = document.getElementById("canvas").toDataURL("image/png");
+        // console.log(src);
+        $('#img').attr('src',src);
     });
 
 
@@ -125,6 +128,54 @@ $(function(){
         $('#img').attr('src',src);
     }
 
+    $('#disti').click(function () {
+        $('#canvas').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸')
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("canvas有人脸");
+                    flag = true;
+                }
+            },
+            error: function (code, message) {
+                alert("complete回调函数出错");
+            }
+        });
+
+
+        $('#img').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸')
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("img有人脸");
+                    flag = true;
+                }
+            },
+            error: function (code, message) {
+                alert("complete回调函数出错")
+            }
+        });
+    });
+
+
 });
 
 
@@ -132,7 +183,7 @@ $(function(){
 
 function face() {
     var flag = false;
-    $('#img').faceDetection({
+    $('#canvas').faceDetection({
         complete: function (faces) {
 
             if (faces.length == 0) { //说明没有检测到人脸

@@ -23,7 +23,7 @@ public class PhotoController {
 
     @RequestMapping("index")
     public String index(){
-        return "photo";
+        return "photo2";
     }
 
 
