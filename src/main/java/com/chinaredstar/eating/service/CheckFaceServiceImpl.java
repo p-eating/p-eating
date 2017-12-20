@@ -3,6 +3,7 @@ package com.chinaredstar.eating.service;
 import com.chinaredstar.eating.components.constants.FaceApiContants;
 import com.chinaredstar.eating.components.utils.HttpUtils;
 import com.chinaredstar.eating.mapper.UserMapper;
+import com.chinaredstar.eating.model.EmployeeModel;
 import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.model.common.RestResultVo;
 import org.json.JSONArray;
@@ -27,7 +28,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
     @Autowired
     private UserMapper userMapper;
     private static final Logger logger = LoggerFactory.getLogger(CheckFaceServiceImpl.class);
-    private static final double CONFIDENCE = 75;
+    private static final double CONFIDENCE = 70;
     @Override
     public RestResultVo checkFace(String base64) {
         HashMap<String, String> map = new HashMap<>();
@@ -76,7 +77,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         if(confidence < CONFIDENCE){
             return new RestResultVo(-1,"无法匹配脸部信息。");
         }
-        UserModel user;
+        EmployeeModel user;
         try {
             long dbStart = System.currentTimeMillis();
             user = userMapper.findUserByFaceToken(faceToken);

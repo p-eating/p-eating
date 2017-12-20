@@ -10,8 +10,13 @@
       INSERT INTO eating_user (user_id, face_token) values (#{userId}, #{faceToken})
     </insert>
 
-    <select id="findUserByFaceToken" parameterType="String" resultType="UserModel">
-        SELECT user.id, user.name, user.gender FROM eating_user user LEFT JOIN `eating_user_face` userFace ON userFace.user_id = user.id where face_token = #{faceToken}
+    <select id="findUserByFaceToken" parameterType="String" resultType="EmployeeModel">
+        SELECT employee.employee_id, employee.name, employee.email, employee.gender, employee.DEPARTMENT_NAME FROM t_sync_esb_employee employee
+        LEFT JOIN `eating_user_face` userFace ON userFace.user_id = employee.employee_id where face_token = #{faceToken}
+    </select>
+
+    <select id="findEmployeeByEmail" parameterType="String" resultType="EmployeeModel">
+        select employee_id, name, email, gender, DEPARTMENT_NAME  from t_sync_esb_employee where email = #{email} and status = 'A'
     </select>
 
 </mapper>
