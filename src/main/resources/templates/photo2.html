@@ -23,7 +23,7 @@
 <div class="booth">
     <video id="video" width="800" height="600"></video>
     <button id='tack'> snap shot</button>
-    <canvas id='canvas' width='800' height='600'></canvas>
+    <canvas id='canvas' width='600' height='400'></canvas>
     <canvas id='canvas2' style="display: none" width='800' height='600'></canvas>
     <!--<img id='img' src=''> </img>-->
 </div>
@@ -55,14 +55,14 @@
         console.log(error);
     });
     $('#tack').click(function () {
-        canvas.getContext('2d').drawImage(video, 0, 0, 800, 600);
+        canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
     });
 
 
-    window.setTimeout(getpicture,500);
+    window.setTimeout(getpicture,1000);
 
     function getpicture() {
-        canvas2.getContext('2d').drawImage(video, 0, 0, 800, 600);
+        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 400);
 
         $('#canvas2').faceDetection({
             complete: function (faces) {
@@ -79,7 +79,7 @@
                         //     drawRectangle(leftTop, faces[i].width, faces[i].height);
                     }
                     console.log("有人脸");
-                    canvas.getContext('2d').drawImage(video, 0, 0, 800, 600);
+                    canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
 
                 }
             }
@@ -108,19 +108,13 @@
                         //     drawRectangle(leftTop, faces[i].width, faces[i].height);
                     }
                     console.log("有人脸")
-                    flag = true;
                 }
-            },
-            error: function (code, message) {
-                alert("complete回调函数出错")
             }
         });
 
     });
 
 </script>
-
-
 
 
 
