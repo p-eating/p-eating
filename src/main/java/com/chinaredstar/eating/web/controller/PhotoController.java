@@ -56,7 +56,8 @@ public class PhotoController {
             String imageStr = null;
             //Base64解码并生成图片
             //替换头
-            imageStr = image.replace("data:image/png;base64,", "").trim();
+//            imageStr = image.replace("data:image/png;base64,", "").trim();
+            imageStr = image.trim();
                     /*if (null != image) {
                         image = image.substring(image.indexOf(",") + 1);
                     }*/
