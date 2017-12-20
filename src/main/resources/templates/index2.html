@@ -83,10 +83,10 @@
                 <h4>BaseInfo</h4>
                 <p class="sm">
                     <grey>姓名.</grey>
-                    | 爱吃鬼
+                    | <span class="user-name">爱吃鬼</span>
                     <br/>
                     <grey>性别.</grey>
-                    |男
+                    |<span class="user-gender">男</span>
                     <br/>
                 </p>
 
@@ -162,9 +162,26 @@
                         //     drawRectangle(leftTop, faces[i].width, faces[i].height);
                     }
                     console.log("有人脸");
-                    canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
+                    canvas.getContext('2d').drawImage(video, 0, 0, 200, 100);
                     var dataTmp = canvas.toDataURL('image/png');
                     dataBase64 = dataTmp.replace("data:image/png;base64,", "");
+                    $.ajax({
+                        type: "post",                      //请求类型
+                        url: "/face/checkFace",           //URL
+                        data: JSON.stringify({image:dataBase64}),   //传递的参数
+                        contentType: "application/json",//返回的数据类型
+                        success: function (data) {          //data就是返回的json类型的数据
+                            if (data.code == 200) {
+                                alert("录入成功");
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function (data) {
+                            alert("请求失败");
+                        }
+                    });
+                    console.log(dataBase64);
                 }
             }
 //            error: function (code, message) {
