@@ -130,7 +130,6 @@
         console.log(error);
     });
 
-
     $('#clean').click(function () {
         canvas2.getContext('2d').clearRect(0,0,canvas2.width,canvas2.height);
         canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
@@ -172,7 +171,7 @@
                         contentType: "application/json",//返回的数据类型
                         success: function (data) {          //data就是返回的json类型的数据
                             if (data.code == 200) {
-                                alert("录入成功");
+                                alert(data.dataMap.name);
                             } else {
                                 alert(data.message);
                             }
