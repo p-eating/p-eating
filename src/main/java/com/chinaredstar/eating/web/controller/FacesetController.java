@@ -2,6 +2,7 @@ package com.chinaredstar.eating.web.controller;
 
 import com.chinaredstar.eating.model.common.RestResultVo;
 import com.chinaredstar.eating.model.faceset.CreateFacesetInputModel;
+import com.chinaredstar.eating.model.faceset.GetFacesetsDetailInputModel;
 import com.chinaredstar.eating.model.faceset.GetFacesetsInputModel;
 import com.chinaredstar.eating.service.faceset.IFaceSetService;
 import com.chinaredstar.perseus.utils.JsonUtil;
@@ -45,6 +46,14 @@ public class FacesetController {
         LOG.info("param:[{}]", JsonUtil.toJson(getFacesetsInputModel, false));
 
         return new RestResultVo(faceSetService.getFacesets(getFacesetsInputModel));
+
+    }
+
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST})
+    public RestResultVo<Object> facesets(@RequestBody GetFacesetsDetailInputModel getFacesetsDetailInputModel) throws Exception {
+        LOG.info("param:[{}]", JsonUtil.toJson(getFacesetsDetailInputModel, false));
+
+        return new RestResultVo(faceSetService.getFacesets(getFacesetsDetailInputModel));
 
     }
 
