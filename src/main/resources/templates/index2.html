@@ -71,6 +71,7 @@
                     <canvas id='canvas' width='600' height='400'></canvas>
                     <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
 
+                    <button id="clean">重拍</button>
                 </div>
                 <div class="form-group operation">
                     <input type="submit" value="确定" class="btn btn-primary comfirm-btn"/>
@@ -130,6 +131,16 @@
     });
 
 
+    $('#clean').click(function () {
+        canvas2.getContext('2d').clearRect(0,0,canvas2.width,canvas2.height);
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+        dataBase64 = '';
+        window.setTimeout(getpicture,1000);
+    });
+
+
+
+
     window.setTimeout(getpicture,1000);
 
     function getpicture() {
@@ -153,8 +164,7 @@
                     console.log("有人脸");
                     canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
                     var dataTmp = canvas.toDataURL('image/png');
-                    dataBase64 = dataTmp.replace('"data:image/png;base64,", ""');
-                    console.log(dataBase64);
+                    dataBase64 = dataTmp.replace("data:image/png;base64,", "");
                 }
             }
 //            error: function (code, message) {
