@@ -27,7 +27,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
     @Autowired
     private UserMapper userMapper;
     private static final Logger logger = LoggerFactory.getLogger(CheckFaceServiceImpl.class);
-    private static final double CONFIDENCE = 80;
+    private static final double CONFIDENCE = 75;
     @Override
     public RestResultVo checkFace(String base64) {
         HashMap<String, String> map = new HashMap<>();
@@ -72,6 +72,7 @@ public class CheckFaceServiceImpl implements CheckFaceService{
         JSONObject jsonObject = jsonArray.getJSONObject(0);
         double confidence = jsonObject.getDouble("confidence");
         String faceToken = jsonObject.getString("face_token");
+        logger.info("识别率："+confidence);
         if(confidence < CONFIDENCE){
             return new RestResultVo(-1,"无法匹配脸部信息。");
         }
