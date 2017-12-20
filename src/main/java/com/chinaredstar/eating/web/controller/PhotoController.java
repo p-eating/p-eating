@@ -20,7 +20,6 @@ import java.io.*;
 @RequestMapping("photo")
 public class PhotoController {
 
-
     @RequestMapping("index")
     public String index(){
         return "photo2";
