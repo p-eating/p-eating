@@ -37,12 +37,13 @@
     <script type="text/javascript">
         $(function () {
 
-
             var dataBase64 = '';
 
             var $cameraContent = $('.camera-content');
             $('#camera').hide();
             $('#canvas').hide();
+            $('.create-user-div').hide();
+
             var video = document.getElementById('video'),
                     canvas = document.getElementById('canvas'),
                     snap = document.getElementById('tack'),
@@ -66,12 +67,13 @@
             });
 
             $('#play').click(function () {
-                canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+                canvas.getContext('2d').drawImage(video, 0, 0, 557, 447);
                 var  dataTmp = canvas.toDataURL('image/png');
 
                 dataBase64 = dataTmp.replace("data:image/png;base64,", "");
                 $('#video').hide();
-                $('#play').hide();
+                $('.play-div').hide();
+                $('.create-user-div').show();
                 $('#canvas').show();
             });
 
@@ -132,11 +134,8 @@
             <div class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <div class="form-group camera-content">
                     <div type="text" id="camera"></div>
-                    <video id="video"></video>
-                    <canvas id='canvas' width="640px" height="480px"> </canvas>
-                </div>
-                <div class="form-group">
-                    <input type="button" id="play" value="开始录入" class="btn btn-primary comfirm-btn"/>
+                    <video id="video" width="557px" height="447px"></video>
+                    <canvas id='canvas' width="557px" height="447px"> </canvas>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="name" placeholder="姓名" autocomplete="off"
@@ -154,7 +153,10 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group operation">
+                <div class="form-group operation play-div">
+                    <input type="button" id="play" value="开始拍照" class="btn btn-primary comfirm-btn"/>
+                </div>
+                <div class="form-group operation create-user-div">
                     <input type="button" id="create-user" value="确定录入" class="btn btn-primary comfirm-btn"/>
                 </div>
             </div>
