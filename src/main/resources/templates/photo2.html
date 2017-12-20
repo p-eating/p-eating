@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>jQuery-webcam-js</title>
-    <title>web RTC 测试</title>
+    <title>拍照</title>
     <style>
         .booth {
             width:400px;
@@ -24,12 +23,14 @@
     <button id='tack'> snap shot</button>
     <canvas id='canvas' width='600' height='400'></canvas>
     <canvas id='canvas2' style="display: none" width='800' height='600'></canvas>
-    <!--<img id='img' src=''> </img>-->
+    <img id='img' src=''> </img>
 </div>
 
 <button id="btn">开始识别</button>
 </body>
 <script>
+    var dataBase64 = '';
+
     var video = document.getElementById('video'),
             canvas = document.getElementById('canvas'),
             canvas2 = document.getElementById('canvas2'),
@@ -53,6 +54,7 @@
         //error.code
         console.log(error);
     });
+
     $('#tack').click(function () {
         canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
     });
@@ -79,6 +81,8 @@
                     }
                     console.log("有人脸");
                     canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
+                    var  dataTmp = canvas.toDataURL('image/png');
+                    dataBase64 = dataTmp.replace('"data:image/png;base64,", ""');
 
                 }
             }
