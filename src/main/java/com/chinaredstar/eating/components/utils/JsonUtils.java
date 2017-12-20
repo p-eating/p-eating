@@ -20,9 +20,9 @@ import java.io.IOException;
 public class JsonUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JsonUtils.class);
 
-    private static ObjectMapper mapper = new ObjectMapper();
 
     private static ObjectMapper getMapper() {
+        ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }
