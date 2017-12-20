@@ -13,7 +13,9 @@ public enum EatingExceptionCodeEnum {
 
     UNKNOWN_ERROR(10001, "unknown error exception"),
 
+    NOT_RESULT_EXCEPTION(1001, "face server exception"),
 
+    NOT_FACE_TOKEN_EXCEPTION(1002, "face server exception"),
     //
     ;
 

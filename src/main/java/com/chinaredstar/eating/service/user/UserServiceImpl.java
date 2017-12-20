@@ -7,10 +7,11 @@ import com.chinaredstar.eating.mapper.EatingUserFaceModelMapper;
 import com.chinaredstar.eating.mapper.EatingUserModelMapper;
 import com.chinaredstar.eating.model.EatingUserFaceModel;
 import com.chinaredstar.eating.model.EatingUserModel;
-import com.chinaredstar.eating.model.common.CommonInputModel;
+import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.model.user.DetectFaceResultModel;
 import com.chinaredstar.eating.model.user.DetectResultModel;
-import com.chinaredstar.eating.model.UserModel;
+import com.chinaredstar.eating.web.exception.EatingException;
+import com.chinaredstar.eating.web.exception.EatingExceptionCodeEnum;
 import org.springframework.stereotype.Service;
 import sun.misc.BASE64Encoder;
 
@@ -24,7 +25,7 @@ import java.util.List;
 
 /**
  * @description:
- * @author: chaoyue<chaoyue.fan       @       chinaredstar.com>
+ * @author: chaoyue<chaoyue.fan@chinaredstar.com>
  * @date: Create in 10:28 2017/12/19
  * @version: 1.0.0
  * @modified by:
@@ -77,17 +78,23 @@ public class UserServiceImpl implements UserService {
             map.put("image_file", input2byte(imageFile));
             try {
                 detectResultModel = HttpUtils.postBean(FaceApiContants.CREATE_DETECT_API, model, map, DetectResultModel.class);
-            } catch (Exception e) {
-                throw new Exception(e.getMessage());
+            }catch (Exception e) {
+                if (e instanceof EatingException ){
+                    throw new EatingException(EatingExceptionCodeEnum.NOT_RESULT_EXCEPTION,e.getMessage());
+                }else {
+                    e.printStackTrace();
+                    throw new Exception(e.getMessage());
+                }
+
             } finally {
                 imageFile.close();
             }
         } else {
             detectResultModel = HttpUtils.postBean(FaceApiContants.CREATE_DETECT_API, model, DetectResultModel.class);
         }
-        if (detectResultModel == null) throw new Exception("上传结果为空");
+        if (detectResultModel == null) throw new EatingException(EatingExceptionCodeEnum.NOT_RESULT_EXCEPTION,"上传结果为空");
         List<DetectFaceResultModel> faces = detectResultModel.getFaces();
-        if (CollectionUtils.isEmpty(faces)) throw new Exception("上传图片中未获取到脸部信息");
+        if (CollectionUtils.isEmpty(faces)) throw new EatingException(EatingExceptionCodeEnum.NOT_FACE_TOKEN_EXCEPTION,"上传图片中未获取到脸部信息");
         return faces.get(0).getFaceToken();
     }
 
