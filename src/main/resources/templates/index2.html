@@ -22,12 +22,27 @@
     <link rel="stylesheet" href="/css/style.css"/>
 
 
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Placeholder -->
+    <script src="/js/jquery.placeholder.min.js"></script>
+    <!-- Waypoints -->
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <!-- Main JS -->
+    <script src="/js/main.js"></script>
+
+
     <!-- Modernizr JS -->
     <script src="/js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
     <script src="/js/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript" src="/js/jquery.facedetection.js"></script>
+
 
 </head>
 
@@ -49,7 +64,13 @@
         <div class="col-md-4 ">
             <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
                 <div class="form-group camera-content">
-                    <div type="text" id="camera"></div>
+                    <div type="text" id="camera">
+                        <video id="video" width="800" height="600"></video>
+                    </div>
+
+                    <canvas id='canvas' width='600' height='400'></canvas>
+                    <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
+
                 </div>
                 <div class="form-group operation">
                     <input type="submit" value="确定" class="btn btn-primary comfirm-btn"/>
@@ -81,15 +102,71 @@
         </div>
     </div>
 </div>
+
+<script>
+
+
+    var dataBase64 = '';
+
+    var video = document.getElementById('video'),
+            canvas = document.getElementById('canvas'),
+            canvas2 = document.getElementById('canvas2'),
+            vendorUrl = window.URL || window.webkitURL;
+
+    //媒体对象
+    navigator.getMedia = navigator.getUserMedia ||
+            navagator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia;
+    navigator.getMedia({
+        video: true, //使用摄像头对象
+        audio: false  //不适用音频
+    }, function(strem){
+        video.src = vendorUrl.createObjectURL(strem);
+        video.play();
+    }, function(error) {
+        //error.code
+        console.log(error);
+    });
+
+
+    window.setTimeout(getpicture,1000);
+
+    function getpicture() {
+
+        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 400);
+
+        $('#canvas2').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸');
+                    getpicture();
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("有人脸");
+                    canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
+                    var dataTmp = canvas.toDataURL('image/png');
+                    dataBase64 = dataTmp.replace('"data:image/png;base64,", ""');
+                    console.log(dataBase64);
+                }
+            }
+//            error: function (code, message) {
+//                alert("complete回调函数出错")
+//            }
+        });
+    }
+
+
+
+
+</script>
+
 </body>
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="/js/bootstrap.min.js"></script>
-<!-- Placeholder -->
-<script src="/js/jquery.placeholder.min.js"></script>
-<!-- Waypoints -->
-<script src="/js/jquery.waypoints.min.js"></script>
-<!-- Main JS -->
-<script src="/js/main.js"></script>
 </html>
