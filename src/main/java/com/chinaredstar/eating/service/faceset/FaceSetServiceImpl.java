@@ -58,5 +58,17 @@ public class FaceSetServiceImpl implements IFaceSetService {
         return HttpUtils.postBean(FaceApiContants.GET_DETAIL_FACESETS_API, getFacesetsDetailInputModel, GetFacesetsDetailOutputModel.class);
     }
 
+    /**
+     * 从faceset删除facetoken
+     *
+     * @param removeFacesetInputModel
+     * @return
+     */
+    @Override
+    public RemoveFacesetOutputModel removeFaceset(RemoveFacesetInputModel removeFacesetInputModel) throws Exception {
+
+        return HttpUtils.postBean(FaceApiContants.REMOVE_FACE_FACESETS_API, removeFacesetInputModel, RemoveFacesetOutputModel.class);
+    }
+
 
 }
