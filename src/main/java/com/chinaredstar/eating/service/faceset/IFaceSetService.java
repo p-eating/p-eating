@@ -36,5 +36,13 @@ public interface IFaceSetService {
      */
     GetFacesetsDetailOutputModel getFacesets(GetFacesetsDetailInputModel getFacesetsDetailInputModel) throws Exception;
 
+    /**
+     * 从faceset删除facetoken
+     *
+     * @param removeFacesetInputModel
+     * @return
+     */
+    RemoveFacesetOutputModel removeFaceset(RemoveFacesetInputModel removeFacesetInputModel) throws Exception;
+
 
 }

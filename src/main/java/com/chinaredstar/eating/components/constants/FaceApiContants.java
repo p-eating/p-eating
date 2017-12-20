@@ -30,6 +30,11 @@ public class FaceApiContants {
     public static final String GET_DETAIL_FACESETS_API = "https://api-cn.faceplusplus.com/facepp/v3/faceset/getdetail";
 
     /**
+     * remove face from faceset
+     */
+    public static final String REMOVE_FACE_FACESETS_API = "https://api-cn.faceplusplus.com/facepp/v3/faceset/removeface";
+
+    /**
      * faceSet get facesets
      */
     public static final String GET_FACESETS_API = "https://api-cn.faceplusplus.com/facepp/v3/faceset/getfacesets";

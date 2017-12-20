@@ -4,6 +4,7 @@ import com.chinaredstar.eating.model.common.RestResultVo;
 import com.chinaredstar.eating.model.faceset.CreateFacesetInputModel;
 import com.chinaredstar.eating.model.faceset.GetFacesetsDetailInputModel;
 import com.chinaredstar.eating.model.faceset.GetFacesetsInputModel;
+import com.chinaredstar.eating.model.faceset.RemoveFacesetInputModel;
 import com.chinaredstar.eating.service.faceset.IFaceSetService;
 import com.chinaredstar.perseus.utils.JsonUtil;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 
 /**
@@ -42,7 +44,7 @@ public class FacesetController {
     }
 
     @RequestMapping(value = "/facesets", method = {RequestMethod.POST})
-    public RestResultVo<Object> facesets(@RequestBody GetFacesetsInputModel getFacesetsInputModel) throws Exception {
+    public RestResultVo<Object> facesets(@RequestBody @Valid GetFacesetsInputModel getFacesetsInputModel) throws Exception {
         LOG.info("param:[{}]", JsonUtil.toJson(getFacesetsInputModel, false));
 
         return new RestResultVo(faceSetService.getFacesets(getFacesetsInputModel));
@@ -50,10 +52,18 @@ public class FacesetController {
     }
 
     @RequestMapping(value = "/detail", method = {RequestMethod.POST})
-    public RestResultVo<Object> facesets(@RequestBody GetFacesetsDetailInputModel getFacesetsDetailInputModel) throws Exception {
+    public RestResultVo<Object> detail(@RequestBody @Valid GetFacesetsDetailInputModel getFacesetsDetailInputModel) throws Exception {
         LOG.info("param:[{}]", JsonUtil.toJson(getFacesetsDetailInputModel, false));
 
         return new RestResultVo(faceSetService.getFacesets(getFacesetsDetailInputModel));
+
+    }
+
+    @RequestMapping(value = "/remove", method = {RequestMethod.POST})
+    public RestResultVo<Object> remove(@RequestBody @Valid RemoveFacesetInputModel removeFacesetInputModel) throws Exception {
+        LOG.info("param:[{}]", JsonUtil.toJson(removeFacesetInputModel, false));
+
+        return new RestResultVo(faceSetService.removeFaceset(removeFacesetInputModel));
 
     }
 

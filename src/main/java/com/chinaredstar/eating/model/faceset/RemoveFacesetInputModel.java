@@ -2,7 +2,6 @@ package com.chinaredstar.eating.model.faceset;
 
 import com.chinaredstar.eating.model.common.CommonInputModel;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -11,14 +10,12 @@ import javax.validation.constraints.NotNull;
  * @date: Create in 14:40 2017/12/18
  * @modified by:
  */
-public class GetFacesetsDetailInputModel extends CommonInputModel {
+public class RemoveFacesetInputModel extends CommonInputModel {
 
     @NotNull(message = "不能为空")
     private String facesetToken;
 
-    @Min(value = 1, message = "min is 1")
-    private String start = "1";
-
+    private String faceTokens = "RemoveAllFaceTokens";
 
     public String getFacesetToken() {
         return facesetToken;
@@ -28,11 +25,11 @@ public class GetFacesetsDetailInputModel extends CommonInputModel {
         this.facesetToken = facesetToken;
     }
 
-    public String getStart() {
-        return start;
+    public String getFaceTokens() {
+        return faceTokens;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setFaceTokens(String faceTokens) {
+        this.faceTokens = faceTokens;
     }
 }
