@@ -71,10 +71,9 @@
                     <canvas id='canvas' width='600' height='400'></canvas>
                     <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
 
-                    <button id="clean">重拍</button>
                 </div>
                 <div class="form-group operation">
-                    <input type="submit" value="确定" class="btn btn-primary comfirm-btn"/>
+                    <input type="submit" id="clean" value="重拍" class="btn btn-primary comfirm-btn"/>
                 </div>
             </form>
         </div>
@@ -125,22 +124,19 @@
     }, function(strem){
         video.src = vendorUrl.createObjectURL(strem);
         video.play();
+
+        window.setTimeout(getpicture,1000);
+
     }, function(error) {
         //error.code
         console.log(error);
     });
 
     $('#clean').click(function () {
-        canvas2.getContext('2d').clearRect(0,0,canvas2.width,canvas2.height);
-        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
-        dataBase64 = '';
-        window.setTimeout(getpicture,800);
+        reset();
+        window.setTimeout(getpicture,1000);
     });
 
-
-
-
-    window.setTimeout(getpicture,800);
 
     function getpicture() {
 
@@ -152,7 +148,7 @@
                 if (faces.length == 0) { //说明没有检测到人脸
                     // alert("无人脸")
                     console.log('无人脸');
-                    getpicture();
+                    window.setTimeout(getpicture,100);
                 } else {
 
                     for (var i in faces) {
@@ -174,6 +170,8 @@
                                 alert(data.dataMap.name);
                             } else {
                                 alert(data.message);
+                                reset();
+                                window.setTimeout(getpicture,1000);
                             }
                         },
                         error: function (data) {
@@ -190,7 +188,11 @@
     }
 
 
-
+    function reset() {
+        canvas2.getContext('2d').clearRect(0,0,canvas2.width,canvas2.height);
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+        dataBase64 = '';
+    }
 
 </script>
 
