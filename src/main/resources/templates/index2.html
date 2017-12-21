@@ -156,7 +156,8 @@
                 if (faces.length == 0) { //说明没有检测到人脸
                     // alert("无人脸")
                     console.log('无人脸');
-                    window.setTimeout(getpicture,50);
+                    getpicture();
+//                    window.setTimeout(getpicture,5);
                 } else {
 
                     for (var i in faces) {
@@ -187,8 +188,10 @@
                                 $(".user-info").show();
                             } else {
 //                                alert(data.message);
+                                console.log(data.message);
                                 reset();
-                                window.setTimeout(getpicture,1000);
+                                getpicture();
+//                                window.setTimeout(getpicture,50);
                             }
                         },
                         error: function (data) {
@@ -208,6 +211,17 @@
         canvas2.getContext('2d').clearRect(0,0,canvas2.width,canvas2.height);
         canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
         dataBase64 = '';
+
+
+
+        $(".user-name").text('');
+        $(".user-employeeId").text('');
+        $(".user-gender").text('');
+        $(".user-email").text('');
+        $(".user-departmentName").text('');
+        $(".user-info").hide();
+
+
     }
 
 </script>
