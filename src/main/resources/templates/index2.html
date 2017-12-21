@@ -74,8 +74,8 @@
 
         <div class="col-md-6 " >
             <div class="tab-pane " id="profile" style="padding: 30px">
-                    <canvas id='canvas' widt="300" height="230"></canvas>
-                    <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
+                    <canvas id='canvas' width="300" height="230"></canvas>
+                    <canvas id='canvas2' style="display: none" width='500' height='500'></canvas>
                 <div class="user-info" style="display: none">
                     <h4></h4>
                     <p class="sm">
@@ -148,7 +148,7 @@
 
     function getpicture() {
 
-        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 400);
+        canvas2.getContext('2d').drawImage(video, 0, 0, 500, 500);
 
         $('#canvas2').faceDetection({
             complete: function (faces) {
@@ -156,7 +156,7 @@
                 if (faces.length == 0) { //说明没有检测到人脸
                     // alert("无人脸")
                     console.log('无人脸');
-                    window.setTimeout(getpicture,100);
+                    window.setTimeout(getpicture,50);
                 } else {
 
                     for (var i in faces) {
@@ -165,16 +165,20 @@
                         //     drawRectangle(leftTop, faces[i].width, faces[i].height);
                     }
                     console.log("有人脸");
-                    canvas.getContext('2d').drawImage(video, 0, 0, 300, 230);
-                    var dataTmp = canvas.toDataURL('image/png');
+//                    canvas2.getContext('2d').drawImage(video, 0, 0, 300, 230);
+                    var dataTmp = canvas2.toDataURL('image/png');
                     dataBase64 = dataTmp.replace("data:image/png;base64,", "");
                     $.ajax({
                         type: "post",                      //请求类型
                         url: "/face/checkFace",           //URL
                         data: JSON.stringify({image:dataBase64}),   //传递的参数
                         contentType: "application/json",//返回的数据类型
-                        success: function (data) {          //data就是返回的json类型的数据
+                        success: function (data) {
+                            //data就是返回的json类型的数据
                             if (data.code == 200) {
+
+                                canvas.getContext('2d').drawImage(canvas2, 0, 0, 300, 230);
+
                                 $(".user-name").text(data.dataMap.name);
                                 $(".user-employeeId").text(data.dataMap.employeeId);
                                 $(".user-gender").text(data.dataMap.gender=="M"?"男":"女");
@@ -182,7 +186,7 @@
                                 $(".user-departmentName").text(data.dataMap.departmentName);
                                 $(".user-info").show();
                             } else {
-                                alert(data.message);
+//                                alert(data.message);
                                 reset();
                                 window.setTimeout(getpicture,1000);
                             }
@@ -191,7 +195,6 @@
                             alert("请求失败");
                         }
                     });
-                    console.log(dataBase64);
                 }
             }
 //            error: function (code, message) {
