@@ -61,45 +61,53 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 ">
+        <div class="col-md-6 ">
             <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
                 <div class="form-group camera-content">
-                    <div type="text" id="camera">
-                        <video id="video" width="800" height="600"></video>
-                    </div>
-
-                    <canvas id='canvas' width='600' height='400'></canvas>
-                    <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
-
+                    <video id="video" width="100%"></video>
                 </div>
                 <div class="form-group operation">
                     <input type="submit" id="clean" value="重拍" class="btn btn-primary comfirm-btn"/>
                 </div>
             </form>
         </div>
-        <div class="col-md-4 col-md-offset-4">
-            <div class="tab-pane" id="profile">
-                <h4>BaseInfo</h4>
-                <p class="sm">
-                    <grey>姓名.</grey>
-                    | <span class="user-name">爱吃鬼</span>
-                    <br/>
-                    <grey>性别.</grey>
-                    |<span class="user-gender">男</span>
-                    <br/>
-                </p>
 
-                <h4>Contact</h4>
-                <p class="sm">
-                    <grey> 电话</grey>
-                    - 18545102020
-                    <br/>
-                    <grey> 邮箱</grey>
-                    - aichigui@chinaredstar.com
-                    <br/>
-                </p>
+        <div class="col-md-6 " >
+            <div class="tab-pane " id="profile" style="padding: 30px">
+                    <canvas id='canvas' widt="300" height="230"></canvas>
+                    <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
+                <div class="user-info" style="display: none">
+                    <h4></h4>
+                    <p class="sm">
+                        <grey>姓名.</grey>
+                        | <span class="user-name"></span>
+                        <br/><br/>
+                        <grey>性别.</grey>
+                        |<span class="user-gender"></span>
+                        <br/><br/>
+                        <grey>员 工 号 .</grey>
+                        |<span class="user-employeeId"></span>
+                        <br/>
+                        <br/>
+                        <grey>员工部门.</grey>
+                        |<span class="user-departmentName"></span>
+                        <br/>
+                        <br/>
+                    </p>
+                    <h4></h4>
+                    <p class="sm">
+                        <!--<grey> 电话</grey>-->
+                        <!-- - <span class="user-mobile">18221374069</span>-->
+                        <!--<br/>-->
+                        <grey> 邮箱</grey>
+                        - <span class="user-email"></span>
+                        <br/>
+                    </p>
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>
 
@@ -157,7 +165,7 @@
                         //     drawRectangle(leftTop, faces[i].width, faces[i].height);
                     }
                     console.log("有人脸");
-                    canvas.getContext('2d').drawImage(video, 0, 0, 200, 100);
+                    canvas.getContext('2d').drawImage(video, 0, 0, 300, 230);
                     var dataTmp = canvas.toDataURL('image/png');
                     dataBase64 = dataTmp.replace("data:image/png;base64,", "");
                     $.ajax({
@@ -167,7 +175,12 @@
                         contentType: "application/json",//返回的数据类型
                         success: function (data) {          //data就是返回的json类型的数据
                             if (data.code == 200) {
-                                alert(data.dataMap.name);
+                                $(".user-name").text(data.dataMap.name);
+                                $(".user-employeeId").text(data.dataMap.employeeId);
+                                $(".user-gender").text(data.dataMap.gender=="M"?"男":"女");
+                                $(".user-email").text(data.dataMap.email);
+                                $(".user-departmentName").text(data.dataMap.departmentName);
+                                $(".user-info").show();
                             } else {
                                 alert(data.message);
                                 reset();

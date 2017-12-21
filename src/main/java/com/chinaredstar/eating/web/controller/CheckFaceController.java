@@ -33,16 +33,6 @@ public class CheckFaceController {
         if(StringUtils.isEmpty(image)){
             return new RestResultVo(-1,"传入数据为空。");
         }
-//        byte[] bytes = null;
-//        if(image != null){
-//            try {
-//                long start = System.currentTimeMillis();
-//                bytes = image.getBytes();
-//                logger.info("获取字节所花时间："+(System.currentTimeMillis()-start));
-//            } catch (IOException e) {
-//                return new RestResultVo(-1,"数据转换失败。");
-//            }
-//        }
         RestResultVo restResultVo = checkFaceService.checkFace(image);
         return restResultVo;
     }
