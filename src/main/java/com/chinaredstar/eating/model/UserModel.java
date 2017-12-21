@@ -16,25 +16,14 @@ public class UserModel extends CommonInputModel implements Serializable {
 
     private String imageBase64 ;
     //用户名
-    private String name;
+    private String gemail;
 
-    //性别
-    private String gender;
-
-    public String getName() {
-        return name;
+    public String getGemail() {
+        return gemail;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGemail(String gemail) {
+        this.gemail = gemail;
     }
     public String getImageBase64() {
         return imageBase64;
