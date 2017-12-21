@@ -75,7 +75,7 @@
         <div class="col-md-6 " >
             <div class="tab-pane " id="profile" style="padding: 30px">
                     <canvas id='canvas' width="300" height="230"></canvas>
-                    <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
+                    <canvas id='canvas2' style="display: none" width='600' height='450'></canvas>
                 <div class="user-info" style="display: none">
                     <h4></h4>
                     <p class="sm">
@@ -148,7 +148,7 @@
 
     function getpicture() {
 
-        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 400);
+        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 450);
         console.log('人脸检测开始'+(new Date()).valueOf());
         $('#canvas2').faceDetection({
             complete: function (faces) {
