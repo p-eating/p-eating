@@ -5,8 +5,9 @@ import com.chinaredstar.eating.components.constants.FaceApiContants;
 import com.chinaredstar.eating.components.utils.HttpUtils;
 import com.chinaredstar.eating.mapper.EatingUserFaceModelMapper;
 import com.chinaredstar.eating.mapper.EatingUserModelMapper;
+import com.chinaredstar.eating.mapper.UserMapper;
 import com.chinaredstar.eating.model.EatingUserFaceModel;
-import com.chinaredstar.eating.model.EatingUserModel;
+import com.chinaredstar.eating.model.EmployeeModel;
 import com.chinaredstar.eating.model.UserModel;
 import com.chinaredstar.eating.model.common.CommonOutputModel;
 import com.chinaredstar.eating.model.user.AddFaceModel;
@@ -36,10 +37,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private EatingUserModelMapper eatingUserModelMapper;
+    private EatingUserFaceModelMapper eatingUserFaceModelMapper;
 
     @Resource
-    private EatingUserFaceModelMapper eatingUserFaceModelMapper;
+    private UserMapper userMapper;
+
+    public static final String EMAIL_SUFFIX = "@chinaredstar.com";
     /**
      * @param model
      * @description: 创建用户
@@ -54,13 +57,12 @@ public class UserServiceImpl implements UserService {
         AddFaceModel addFaceModel = new AddFaceModel();
         addFaceModel.setFaceTokens(facesetToken);
         HttpUtils.postBean(FaceApiContants.ADD_FACE_FACESET_API, addFaceModel, CommonOutputModel.class);
-        EatingUserModel eatingUserModel = new EatingUserModel();
-        eatingUserModel.setGender(Integer.valueOf(model.getGender()));
-        eatingUserModel.setName(model.getName());
-        eatingUserModelMapper.insertSelective(eatingUserModel);
+        String email = model.getGemail()+EMAIL_SUFFIX;
+        EmployeeModel employeeByEmail = userMapper.findEmployeeByEmail(email);
+        if (null == employeeByEmail) throw new EatingException(EatingExceptionCodeEnum.NOT_RESULT_EXCEPTION,"未获取到邮箱为:"+email+"的用户信息");
         EatingUserFaceModel faceModel = new EatingUserFaceModel();
         faceModel.setFaceToken(facesetToken);
-        faceModel.setUserId(eatingUserModel.getId());
+        faceModel.setUserId(employeeByEmail.getEmployeeId());
         eatingUserFaceModelMapper.insertSelective(faceModel);
 
     }
