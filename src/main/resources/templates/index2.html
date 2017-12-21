@@ -75,7 +75,7 @@
         <div class="col-md-6 " >
             <div class="tab-pane " id="profile" style="padding: 30px">
                     <canvas id='canvas' width="300" height="230"></canvas>
-                    <canvas id='canvas2' style="display: none" width='500' height='500'></canvas>
+                    <canvas id='canvas2' style="display: none" width='600' height='400'></canvas>
                 <div class="user-info" style="display: none">
                     <h4></h4>
                     <p class="sm">
@@ -148,11 +148,12 @@
 
     function getpicture() {
 
-        canvas2.getContext('2d').drawImage(video, 0, 0, 500, 500);
-
+        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 400);
+        console.log('人脸检测开始'+(new Date()).valueOf());
         $('#canvas2').faceDetection({
             complete: function (faces) {
 
+                console.log('人脸检测结束'+(new Date()).valueOf());
                 if (faces.length == 0) { //说明没有检测到人脸
                     // alert("无人脸")
                     console.log('无人脸');
@@ -160,11 +161,11 @@
 //                    window.setTimeout(getpicture,5);
                 } else {
 
-                    for (var i in faces) {
-                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-                        // var leftTop = [faces[i].x, faces[i].y];
-                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
-                    }
+//                    for (var i in faces) {
+//                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+//                        // var leftTop = [faces[i].x, faces[i].y];
+//                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+//                    }
                     console.log("有人脸");
 //                    canvas2.getContext('2d').drawImage(video, 0, 0, 300, 230);
                     var dataTmp = canvas2.toDataURL('image/png');
@@ -187,7 +188,7 @@
                                 $(".user-departmentName").text(data.dataMap.departmentName);
                                 $(".user-info").show();
                             } else {
-//                                alert(data.message);
+                                alert(data.message);
                                 console.log(data.message);
                                 reset();
                                 getpicture();
