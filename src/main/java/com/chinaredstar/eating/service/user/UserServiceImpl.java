@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         HttpUtils.postBean(FaceApiContants.ADD_FACE_FACESET_API, addFaceModel, CommonOutputModel.class);
         String email = model.getGemail()+EMAIL_SUFFIX;
         EmployeeModel employeeByEmail = userMapper.findEmployeeByEmail(email);
-        if (null == employeeByEmail) throw new EatingException(EatingExceptionCodeEnum.NOT_RESULT_EXCEPTION,"未获取到邮箱为:"+email+"的用户信息");
+        if (null == employeeByEmail) throw new EatingException(EatingExceptionCodeEnum.NOT_RESULT_EXCEPTION,"未获取到邮箱为:【"+email+"】的用户信息");
         EatingUserFaceModel faceModel = new EatingUserFaceModel();
         faceModel.setFaceToken(facesetToken);
         faceModel.setUserId(employeeByEmail.getEmployeeId());

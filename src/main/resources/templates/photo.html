@@ -1,31 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>jQuery-webcam-js</title>
-    <link href="../css/cs.css" rel="stylesheet" type="text/css"> </link>
+    <title>拍照</title>
+    <style>
+        .booth {
+            width:400px;
+            background:#ccc;
+            border: 10px solid #ddd;
+            margin: 0 auto;
+        }
+    </style>
+
+
+    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.facedetection.js"></script>
 
 </head>
 <body>
 
-<button class="play">拍照</button>
-<div id="status"></div>
-<div id="webcam"></div>
+<div class="booth">
+    <video id="video" width="800" height="800"></video>
+    <button id='tack'> snap shot</button>
+    <canvas id='canvas' width='600' height='600'></canvas>
+    <canvas id='canvas2' style="display: none" width='800' height='600'></canvas>
+    <img id='img' src=''> </img>
+</div>
 
-<canvas id="canvas"></canvas>
+<button id="btn">开始识别</button><br> </br>
 
-<img id="img" src="../images/test.png"> </img>
-
-<button id="disti">开始识别</button>
-
+<button id="upload">上传</button>
 </body>
+<script>
+    var dataBase64 = '';
+
+    var video = document.getElementById('video'),
+            canvas = document.getElementById('canvas'),
+            canvas2 = document.getElementById('canvas2'),
+            snap = document.getElementById('tack'),
+            img = document.getElementById('img'),
+            vendorUrl = window.URL || window.webkitURL;
+
+    //媒体对象
+    navigator.getMedia = navigator.getUserMedia ||
+            navagator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia;
+    navigator.getMedia({
+        video: true, //使用摄像头对象
+        audio: false  //不适用音频
+    }, function(strem){
+        console.log(strem);
+        video.src = vendorUrl.createObjectURL(strem);
+        video.play();
+//        window.setTimeout(getpicture,1000);
+    }, function(error) {
+        //error.code
+        console.log(error);
+    });
+//
+    $('#tack').click(function () {
+        canvas.getContext('2d').drawImage(video, 0, 0, 600, 600);
+        var  dataTmp = canvas.toDataURL('image/png');
+        dataBase64 = dataTmp.replace("data:image/png;base64,", "");
+    });
 
 
-<script src="../js/jquery.min.js"></script>
 
-<script src="../webcam/jquery.webcam.js"></script>
+    $('#upload').click(function () {
 
-<script src="../facedetection/jquery.facedetection.js"></script>
+        $.ajax({
+            type: "post",                      //请求类型
+            url: "/photo/upload",           //URL
+            data: JSON.stringify({image:dataBase64}),   //传递的参数
+            contentType: "application/json",//返回的数据类型
+            success: function (data) {          //data就是返回的json类型的数据
+            },
+            error: function (data) {
+                alert("请求失败");
+            }
+        });
+    });
 
-<script src="../js/photo.js"></script>
+
+    function getpicture() {
+        canvas2.getContext('2d').drawImage(video, 0, 0, 600, 400);
+
+        $('#canvas2').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸');
+//                    getpicture();
+                    window.setTimeout(getpicture,1000);
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("有人脸");
+                    canvas.getContext('2d').drawImage(video, 0, 0, 600, 400);
+                    var  dataTmp = canvas.toDataURL('image/png');
+                    dataBase64 = dataTmp.replace('"data:image/png;base64,", ""');
+
+                }
+            }
+//            error: function (code, message) {
+//                alert("complete回调函数出错")
+//            }
+        });
+
+
+    }
+
+
+
+    $('#btn').click(function () {
+        $('#canvas').faceDetection({
+            complete: function (faces) {
+
+                if (faces.length == 0) { //说明没有检测到人脸
+                    // alert("无人脸")
+                    console.log('无人脸')
+                } else {
+
+                    for (var i in faces) {
+                        draw(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+                        // var leftTop = [faces[i].x, faces[i].y];
+                        //     drawRectangle(leftTop, faces[i].width, faces[i].height);
+                    }
+                    console.log("有人脸")
+                }
+            }
+        });
+
+    });
+
+</script>
+
+
 
 </html>
