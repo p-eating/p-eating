@@ -1,6 +1,8 @@
 package com.chinaredstar.eating.web.controller;
 
+import com.chinaredstar.eating.model.common.PhotoReqVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,14 +24,14 @@ public class PhotoController {
 
     @RequestMapping("index")
     public String index(){
-        return "photo2";
+        return "photo";
     }
 
 
 
     @RequestMapping(value = "upload",method = RequestMethod.POST)
     @ResponseBody
-    public String photo(HttpServletRequest request, HttpServletResponse response){
+    public String photo(HttpServletRequest request, @RequestBody PhotoReqVo req, HttpServletResponse response){
 
 
         String path="/Users/lixiaohao/Documents/test/test.png";
@@ -44,10 +46,10 @@ public class PhotoController {
         File tmp_path = new File(savePath);
         tmp_path.mkdirs();
         //System.out.println("照片数据保存路径:" + savePath);
-        File file_txt = new File(savePath+"001.PNG");
+        File file_txt = new File(savePath+System.currentTimeMillis()+".PNG");
 
 
-        String image = request.getParameter("image");
+        String image = req.getImage();
 
         OutputStream  out = null;
         try {
