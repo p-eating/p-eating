@@ -74,23 +74,23 @@
 
         <div class="col-md-6 " >
             <div class="tab-pane " id="profile" style="padding: 30px">
-                    <canvas id='canvas' width="300" height="230"></canvas>
+                    <canvas id='canvas' width="300" height="230" style="display: none" ></canvas>
                     <canvas id='canvas2' style="display: none" width='600' height='450'></canvas>
                 <div class="user-info" style="display: none">
                     <h4></h4>
                     <p class="sm">
-                        <grey>姓名.</grey>
-                        | <span class="user-name"></span>
+                        <grey calss="fadeinKey" style="display: none;">姓名.|</grey>
+                         <span class="user-name fadeinVal" style="display: none;"></span>
                         <br/><br/>
-                        <grey>性别.</grey>
-                        |<span class="user-gender"></span>
+                        <grey calss="fadeinKey" style="display: none;">性别.|</grey>
+                        <span class="user-gender fadeinVal" style="display: none;"></span>
                         <br/><br/>
-                        <grey>员 工 号 .</grey>
-                        |<span class="user-employeeId"></span>
+                        <grey calss="fadeinKey" style="display: none;">员 工 号 .|</grey>
+                        <span class="user-employeeId fadeinVal" style="display: none;"></span>
                         <br/>
                         <br/>
-                        <grey>员工部门.</grey>
-                        |<span class="user-departmentName"></span>
+                        <grey calss="fadeinKey" style="display: none;">员工部门.|</grey>
+                        <span class="user-departmentName fadeinVal" style="display: none;"></span>
                         <br/>
                         <br/>
                     </p>
@@ -99,8 +99,8 @@
                         <!--<grey> 电话</grey>-->
                         <!-- - <span class="user-mobile">18221374069</span>-->
                         <!--<br/>-->
-                        <grey> 邮箱</grey>
-                        - <span class="user-email"></span>
+                        <grey style="display: none;"> 邮箱 - </grey>
+                        <span class="user-email fadeinVal" style="display: none;"></span>
                         <br/>
                     </p>
                 </div>
@@ -187,6 +187,12 @@
                                 $(".user-email").text(data.dataMap.email);
                                 $(".user-departmentName").text(data.dataMap.departmentName);
                                 $(".user-info").show();
+
+
+                                $('#canvas').fadeIn(2000);
+                                $('grey').fadeIn(3000);
+                                $('.fadeinVal').fadeIn(3000);
+
                             } else {
                                 alert(data.message);
                                 console.log(data.message);
@@ -221,6 +227,9 @@
         $(".user-email").text('');
         $(".user-departmentName").text('');
         $(".user-info").hide();
+
+        $('.grey').hide();
+        $('.fadeinVal').hide();
 
 
     }
